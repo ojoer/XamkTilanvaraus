@@ -1,4 +1,4 @@
-# XamkTilanvaraus
+# Xamk Tilanvaraus
 Gitti tälle projektille
 
 Projekti on toteutettu kouluprojektia varten kurssille Sähköisen palvelun suunnittelu ja toteutus.
