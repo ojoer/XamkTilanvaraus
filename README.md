@@ -3,7 +3,7 @@ Gitti tälle projektille
 
 Projekti on toteutettu kouluprojektia varten kurssille Sähköisen palvelun suunnittelu ja toteutus.
 
-# Tarvittavat ohjelmistot kehitykseen:
+## Tarvittavat ohjelmistot kehitykseen:
 
 GIT - Versio 2.15.0 tai uudempi
 
@@ -17,7 +17,7 @@ Node.JS - Versio 8.9.0 LTS tai uudempi
 
     https://nodejs.org/en/
 
-## Vaihtoehtoiset mutta suositeltavat
+### Vaihtoehtoiset mutta suositeltavat
 
 Visual Studio Code
     
