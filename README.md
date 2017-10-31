@@ -24,18 +24,21 @@ Visual Studio Code
 https://code.visualstudio.com/
 
     Lisäosat siihen:
-        Beautify
-        Auto Close Tag
-        Debugger For Chrome
-        Node.js Extension Pack
-        IntelliSense for Css Class names
-        HTML Snippets
-        HTML Css Class Completion
-        Angular 1 JavaScript and TypeScript Snippets
-        vscode-Icons
-        Path Intellisense
+        Pakolliset:
+            Beautify
+            Node.js Extension Pack
 
-    Jos Angular 2+
+        Vaihtoehtoiset:
+            Auto Close Tag
+            Debugger For Chrome
+            IntelliSense for Css Class names
+            HTML Snippets
+            HTML Css Class Completion
+            Angular 1 JavaScript and TypeScript Snippets
+            vscode-Icons
+            Path Intellisense
+
+    Jos Angular 2+:
         Typescript hero
         Angular v5 Typescript Snippets
         TSLint
