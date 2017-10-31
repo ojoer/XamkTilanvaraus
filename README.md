@@ -7,17 +7,15 @@ Projekti on toteutettu kouluprojektia varten kurssille Sähköisen palvelun suun
 
 GIT - Versio 2.15.0 tai uudempi
 
-Ohjeet gitin käyttöön: https://www.atlassian.com/git/tutorials
+    Ohjeet gitin käyttöön: https://www.atlassian.com/git/tutorials
 
-Latauslinkki: https://git-scm.com/download/win
-
-
+    Latauslinkki: https://git-scm.com/download/win
 
 Node.JS - Versio 8.9.0 LTS tai uudempi
 
-NPM - Versio 5.5.1 tai uudempi
+    NPM - Versio 5.5.1 tai uudempi
 
-https://nodejs.org/en/
+    https://nodejs.org/en/
 
 ## Vaihtoehtoiset mutta suositeltavat
 
