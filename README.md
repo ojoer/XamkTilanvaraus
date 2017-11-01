@@ -38,8 +38,12 @@ https://code.visualstudio.com/
             vscode-Icons
             Path Intellisense
 
-## Build & development
+## Buildi ja Kehitys
 
 1. Run "npm install"
 
 2. Run `grunt` for building and `grunt serve` for preview.
+
+### Tekniikat
+
+Käytämme AngularJS, HTML5, CSS3
