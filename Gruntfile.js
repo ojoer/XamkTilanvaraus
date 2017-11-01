@@ -1,4 +1,5 @@
 // Generated on 2017-11-01 using generator-angular 0.16.0
+/* eslint-disable */
 'use strict';
 
 // # Globbing
@@ -6,6 +7,7 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+
 
 module.exports = function (grunt) {
 
