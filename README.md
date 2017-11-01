@@ -38,7 +38,8 @@ https://code.visualstudio.com/
             vscode-Icons
             Path Intellisense
 
-    Jos Angular 2+:
-        Typescript hero
-        Angular v5 Typescript Snippets
-        TSLint
+## Build & development
+
+1. Run "npm install"
+
+2. Run `grunt` for building and `grunt serve` for preview.
