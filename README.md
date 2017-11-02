@@ -39,9 +39,11 @@ https://code.visualstudio.com/
 
 1. Run "npm install"
 
-2. Run Bower Install
+2. npm install -g grunt-cli bower yo
 
-2. Run `grunt` for building and `grunt serve` for preview.
+3. Run Bower Install
+
+4. Run `grunt` for building and `grunt serve` for preview.
 
 ### Tekniikat
 
