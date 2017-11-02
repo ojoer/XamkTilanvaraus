@@ -37,11 +37,11 @@ https://code.visualstudio.com/
 
 ## Buildi ja Kehitys
 
-1. npm install -g grunt-cli bower yo
+1. Run "npm install"
 
-2. Run "npm install"
+2. Run Bower Install
 
-3. Run `grunt` for building and `grunt serve` for preview.
+2. Run `grunt` for building and `grunt serve` for preview.
 
 ### Tekniikat
 
