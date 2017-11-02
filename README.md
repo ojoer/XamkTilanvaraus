@@ -30,13 +30,10 @@ https://code.visualstudio.com/
 
         Vaihtoehtoiset:
             Auto Close Tag
-            Debugger For Chrome
             IntelliSense for Css Class names
             HTML Snippets
-            HTML Css Class Completion
             Angular 1 JavaScript and TypeScript Snippets
             vscode-Icons
-            Path Intellisense
 
 ## Buildi ja Kehitys
 
