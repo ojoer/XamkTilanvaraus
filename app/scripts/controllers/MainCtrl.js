@@ -2,13 +2,16 @@
 
 /**
  * @ngdoc function
- * @name xamkTilanvarausApp.controller:AboutCtrl
+ * @name xamkTilanvarausApp.controller:MainCtrl
  * @description
- * # AboutCtrl
+ * # MainCtrl
  * Controller of the xamkTilanvarausApp
  */
+
+ /* eslint-disable */
+ 
 angular.module('xamkTilanvarausApp')
-  .controller('AboutCtrl', function () {
+  .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

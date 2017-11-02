@@ -3,6 +3,7 @@ module.exports = {
         "browser": true
     },
     "extends": "eslint:recommended",
+    "extends": "plugin:angular/johnpapa",
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
