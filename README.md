@@ -43,7 +43,7 @@ Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 **Aja seuraavat komennot komentorivillä projektin juuressa seuraavassa järjestyksessä**
 1. `npm install`
 
-2. __Tämän voi jättää välistä jos tämä on ennen suoritettu      kyseisellä koneella__ `npm install -g grunt-cli bower yo` 
+2. _Tämän voi jättää välistä jos tämä on ennen suoritettu      kyseisellä koneella_ `npm install -g grunt-cli bower yo` 
 
 3. `bower install --force`
 
