@@ -84,7 +84,7 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 0;
+    margin-bottom: 15px;
     padding-bottom: 0;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
@@ -124,7 +124,7 @@ body {
   }
 
   .navbar-default .navbar-nav > li > a{
-    font-size: 32px;
+    font-size: 2em;
     position: relative;
     top: 50%; 
     transform: translateY(-50%);
@@ -133,6 +133,8 @@ body {
 
   .navbar-nav > li{
     height: 100px;
+    min-width: 25%;
+    text-align: center;
   }
 
   .navbar-header{
@@ -140,7 +142,7 @@ body {
     left:15px;
   }
   .navbar-default{
-    padding-left:50%;
+    padding-left:30%;
   }
 
   .content_1{
