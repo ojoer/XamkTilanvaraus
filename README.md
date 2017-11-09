@@ -37,11 +37,15 @@ https://code.visualstudio.com/
 
 ## Buildi ja Kehitys
 
-1. Run "npm install"
+**!HUOM!**
+Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 
-2. npm install -g grunt-cli bower yo
+**Aja seuraavat komennot komentorivillä projektin juuressa seuraavassa järjestyksessä**
+1. `npm install`
 
-3. Run bower install --force
+2. `npm install -g grunt-cli bower yo`
+
+3. `bower install --force`
 
 4. Run `grunt` for building and `grunt serve` for preview.
 
