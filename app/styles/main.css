@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Black.ttf);
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -5,8 +10,13 @@
   padding: 0.2em 0;
 }
 
+p{
+  font-size:18px;
+}
+
 body {
   padding: 0;
+  font-family: Montserrat,sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -74,7 +84,8 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
@@ -83,23 +94,72 @@ body {
 
   .navbar-default{
     background-color: #000 !important;
+    margin-bottom: 0;
+  }
+
+  .navbar{
+    min-height:100px;
+    border-radius: 0 !important;
   }
 
   .navbar-default a{
     color: #fff !important;
   }
 
-  .navbar-default .navbar-nav > .active >  a{
+  .navbar-default .navbar-nav > .active > a{
+    background-color: inherit;
+  }
+
+  .navbar-default .navbar-nav > .active{
     background-color: #fbba18 !important;
-    padding-left: 30%;
-    padding-right: 30%;
+  }
+
+  .navbar > .container .navbar-brand{
+    margin-left: -15px;
+    padding-top: 5px;
   }
   
+  .nav > ul{
+    height:100px;
+  }
+
+  .navbar-default .navbar-nav > li > a{
+    font-size: 32px;
+    position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+  }
+
+  .navbar-nav > li{
+    height: 100px;
+  }
+
   .navbar-header{
     position: absolute;
     left:15px;
   }
   .navbar-default{
     padding-left:50%;
+  }
+
+  .content_1{
+    min-height:400px;
+    background-color: rgb(233, 233, 233);
+  }
+
+  .content_2{
+    min-height:400px;
+  }
+
+  .main{
+    padding: 0 5%;
+  }
+
+  .header_img{
+    display: block;
+    height: 60px;
+    margin-top: 10px;
+    margin-left: 10px;
   }
 }
