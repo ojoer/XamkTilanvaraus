@@ -1,0 +1,92 @@
+<div class="container">
+    <h2>Varauslomake</h2>
+    <form class="form-horizontal" action="/action_page.php">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="etunimi">Etunimi:</label>
+                <input type="etunimi" class="form-control" id="etunimi" placeholder="Etunimi" name="etunimi">
+            </div>
+
+            <div class="form-group">
+                <label for="pnumero">Puhelinnumero:</label>
+                <input type="pnumero" class="form-control" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
+            </div>
+
+            <div class="form-group">
+                <label for="osoite">Postiosoite:</label>
+                <input type="osoite" class="form-control" id="osoite" placeholder="Postiosoite" name="osoite">
+            </div>
+
+            <div class="form-group">
+                <label for="postiNumero">Postinumero:</label>
+                <input type="postiNumero" class="form-control" id="postiNumero" placeholder="Postinumero" name="postiNumero">
+            </div>
+
+        </div>
+
+        <div class="col-sm-6">
+
+            <div class="form-group">
+                <label for="sukunimi">Sukunimi:</label>
+                <input type="sukunimi" class="form-control" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Sähköposti:</label>
+                <input type="email" class="form-control" id="email" placeholder="Sähköpostiosoite" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="postiToimipaikka">Postitoimipaikka:</label>
+                <input type="postiToimipaikka" class="form-control" id="postiToimipaikka" placeholder="Postitoimipaikka" name="postiToimipaikka">
+            </div>
+
+        </div>
+        <div class="col-sm-12" id="maksutapa">
+            <h2>Maksutapa</h2>
+
+            <!--Maksutapa plugari tähän-->
+
+        </div>
+
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <h3>Tilauksen yhteenveto</h3>
+
+                <h2>Loppusumma</h2>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Lisäpalvelut</h3>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> Ruoka- ja juomapalvelut</label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> Vahtimestaripalvelut</label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> IT-tuki</label>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </form>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
+    </div>
+    <button class="btn btn-default">Lähetä</button>
+    <button type="cancel" class="btn btn-default">Peruuta</button>
+</div>
