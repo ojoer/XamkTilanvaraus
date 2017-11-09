@@ -3,6 +3,20 @@
   src: url(./fonts/Montserrat-Black.ttf);
 }
 
+@font-face {
+  font-family: MSLIGHT;
+  src: url(./fonts/Montserrat-Light.ttf);
+}
+
+@font-face {
+  font-family: MSBOLD;
+  src: url(./fonts/Montserrat-Bold.ttf);
+}
+
+h1{
+  font-family: MSBOLD,sans-serif;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -11,7 +25,8 @@
 }
 
 p{
-  font-size:18px;
+  font-size:22px;
+  font-family: MSLIGHT, sans-serif;
 }
 
 body {
@@ -30,7 +45,7 @@ body {
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -45,6 +60,7 @@ body {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+  text-align: center;
 }
 
 .container-narrow > hr {
@@ -95,6 +111,7 @@ body {
   .navbar-default{
     background-color: #000 !important;
     margin-bottom: 0;
+    border: 0;
   }
 
   .navbar{
@@ -149,6 +166,27 @@ body {
     padding-left:30%;
   }
 
+  .nav-tabs{
+    width:100%;
+  }
+
+  .nav-tabs > li{
+    width:20%;
+    text-align: center;
+    border-radius:4px
+  }
+
+  .nav-tabs .active > a{
+    background-color:black !important;
+    color: #fbba18 !important;
+  }
+
+  .nav-tabs > li > a{
+    color: #fbba18;
+    font-size: 25px;
+    background-color: rgb(233, 233, 233); !important;
+  }
+
   .content_1{
     min-height:400px;
     background-color: rgb(233, 233, 233);
@@ -156,6 +194,16 @@ body {
 
   .content_2{
     min-height:400px;
+  }
+
+  .content_3{
+    min-height: 400px;
+    background-color: black;
+    margin-left: 1px; 
+  }
+
+  .row{
+    padding-bottom: 15px;
   }
 
   .main{
