@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Varauslomake</h2>
     <form class="form-horizontal" action="/action_page.php">
-        <div class="col-sm-6">
+        <div class="col-xs-6">
             <div class="form-group">
                 <label for="etunimi">Etunimi:</label>
                 <input type="etunimi" class="form-control" id="etunimi" placeholder="Etunimi" name="etunimi">
@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-xs-6">
 
             <div class="form-group">
                 <label for="sukunimi">Sukunimi:</label>
@@ -42,22 +42,22 @@
             </div>
 
         </div>
-        <div class="col-sm-12" id="maksutapa">
+        <div class="col-xs-12" id="maksutapa">
             <h2>Maksutapa</h2>
 
             <!--Maksutapa plugari tähän-->
 
         </div>
 
-        <div class="col-sm-12">
-            <div class="col-sm-6">
+        <div class="col-xs-12">
+            <div class="col-xs-6">
                 <h3>Tilauksen yhteenveto</h3>
 
                 <h2>Loppusumma</h2>
 
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-xs-6">
                 <h3>Lisäpalvelut</h3>
 
                 <div class="checkbox">
@@ -77,16 +77,19 @@
 
             </div>
 
+            <div class="col-xs-12">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
+                </div>
+                <button class="btn btn-default">Lähetä</button>
+                <button type="cancel" class="btn btn-default">Peruuta</button>
+            </div>
+
+
         </div>
-
-
 
     </form>
 
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
-    </div>
-    <button class="btn btn-default">Lähetä</button>
-    <button type="cancel" class="btn btn-default">Peruuta</button>
+
 </div>
