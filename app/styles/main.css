@@ -137,6 +137,10 @@ body {
     text-align: center;
   }
 
+  .navbar-nav{
+    width:100%
+  }
+
   .navbar-header{
     position: absolute;
     left:15px;
