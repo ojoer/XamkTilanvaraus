@@ -47,7 +47,9 @@ Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 
 3. `bower install --force`
 
-4. Run `grunt` for building and `grunt serve` for preview.
+4. `grunt serve` käynnistää sovelluksen ja laittaa live previewin päälle
+
+5. **!HUOM!** Seuraava komento on tarkoitettu ainoastaan julkaisua varten `grunt` 
 
 ### Tekniikat
 
