@@ -1,11 +1,30 @@
-const http = require("http");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+// const grunt = require("grunt");
 
-http.createServer(function (request, response) {
+app.set("views", "./views");
 
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("./public"));
 
+// grunt.tasks(['serve']);
 
-    response.end('asd\n');
-}).listen(8000);
+app.post("/tallenna", (req, res) => {
 
-console.log('Palvelin käynnissä osoitteessa http://127.0.0.1:8000/');
+    console.log("asd");
+
+});
+
+app.get("/", (req, res) => {
+    
+        console.log("asd");
+    
+    });
+
+// app.listen(9000, () => {
+    
+//     console.log("Palvelin käynnistyi porttiin 1234");
+    
+// });
