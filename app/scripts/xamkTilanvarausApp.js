@@ -31,7 +31,7 @@ angular
       })
       .when('/form', {
         templateUrl: 'views/form.html',
-        controller: 'FormController',
+        controller: 'FormCtrl',
         controllerAs: 'form'
       })
       .otherwise({

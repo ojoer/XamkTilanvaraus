@@ -1,25 +1,25 @@
 <div class="container">
     <h2>Varauslomake</h2>
-    <form class="form-horizontal" method="POST" action="/tallenna">
+    <form class="form-horizontal" >
         <div class="col-xs-6">
             <div class="form-group">
                 <label for="etunimi">Etunimi:</label>
-                <input type="etunimi" class="form-control" id="etunimi" placeholder="Etunimi" name="etunimi">
+                <input type="etunimi" class="form-control" ng-model="varaus.etunimi" id="etunimi" placeholder="Etunimi" name="etunimi">
             </div>
 
             <div class="form-group">
                 <label for="pnumero">Puhelinnumero:</label>
-                <input type="pnumero" class="form-control" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
+                <input type="pnumero" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
             </div>
 
             <div class="form-group">
                 <label for="osoite">Postiosoite:</label>
-                <input type="osoite" class="form-control" id="osoite" placeholder="Postiosoite" name="osoite">
+                <input type="osoite" class="form-control" ng-model="varaus.osoite" id="osoite" placeholder="Postiosoite" name="osoite">
             </div>
 
             <div class="form-group">
                 <label for="postiNumero">Postinumero:</label>
-                <input type="postiNumero" class="form-control" id="postiNumero" placeholder="Postinumero" name="postiNumero">
+                <input type="postiNumero" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
             </div>
 
         </div>
@@ -28,17 +28,17 @@
 
             <div class="form-group">
                 <label for="sukunimi">Sukunimi:</label>
-                <input type="sukunimi" class="form-control" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
+                <input type="sukunimi" class="form-control" ng-model="varaus.sukunimi" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
             </div>
 
             <div class="form-group">
                 <label for="email">Sähköposti:</label>
-                <input type="email" class="form-control" id="email" placeholder="Sähköpostiosoite" name="email">
+                <input type="email" class="form-control" ng-model="varaus.email" id="email" placeholder="Sähköpostiosoite" name="email">
             </div>
 
             <div class="form-group">
                 <label for="postiToimipaikka">Postitoimipaikka:</label>
-                <input type="postiToimipaikka" class="form-control" id="postiToimipaikka" placeholder="Postitoimipaikka" name="postiToimipaikka">
+                <input type="postiToimipaikka" class="form-control" ng-model="varaus.postiToimipaikka" id="postiToimipaikka" placeholder="Postitoimipaikka" name="postiToimipaikka">
             </div>
 
         </div>
@@ -62,17 +62,17 @@
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember"> Ruoka- ja juomapalvelut</label>
+                        <input type="checkbox" ng-model="varaus.ruoka" name="remember"> Ruoka- ja juomapalvelut</label>
                 </div>
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember"> Vahtimestaripalvelut</label>
+                        <input type="checkbox" ng-model="varaus.vahti" name="remember"> Vahtimestaripalvelut</label>
                 </div>
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember"> IT-tuki</label>
+                        <input type="checkbox" ng-model="varaus.it" name="remember"> IT-tuki</label>
                 </div>
 
             </div>
@@ -82,7 +82,7 @@
                     <label>
                         <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
                 </div>
-                <button class="btn btn-default">Lähetä</button>
+                <button class="btn btn-default" ng-click="myFunc()">Lähetä</button>
                 <button type="cancel" class="btn btn-default">Peruuta</button>
             </div>
 

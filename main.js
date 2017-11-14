@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-// const grunt = require("grunt");
 
 app.set("views", "./views");
 
@@ -9,22 +8,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
-// grunt.tasks(['serve']);
+app.use((req, res, next) => {
+    
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type");
+    next();
+    
+});
 
 app.post("/tallenna", (req, res) => {
 
-    console.log("asd");
+    console.log(req.body);
+
+    
 
 });
 
-app.get("/", (req, res) => {
+app.listen(8000, () => {
     
-        console.log("asd");
+    console.log("Varauspalvelin käynnistyi porttiin 8000");
     
-    });
-
-// app.listen(9000, () => {
-    
-//     console.log("Palvelin käynnistyi porttiin 1234");
-    
-// });
+});
