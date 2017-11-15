@@ -1,25 +1,25 @@
 <div class="container">
     <h2>Varauslomake</h2>
-    <form class="form-horizontal" >
+    <form class="form-horizontal" name="form">
         <div class="col-xs-6">
             <div class="form-group">
                 <label for="etunimi">Etunimi:</label>
-                <input type="etunimi" class="form-control" ng-model="varaus.etunimi" id="etunimi" placeholder="Etunimi" name="etunimi">
+                <input type="text" class="form-control" ng-model="varaus.etunimi" id="etunimi" placeholder="Etunimi" name="etunimi">
             </div>
 
             <div class="form-group">
                 <label for="pnumero">Puhelinnumero:</label>
-                <input type="pnumero" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
+                <input type="number" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
             </div>
 
             <div class="form-group">
                 <label for="osoite">Postiosoite:</label>
-                <input type="osoite" class="form-control" ng-model="varaus.osoite" id="osoite" placeholder="Postiosoite" name="osoite">
+                <input type="text" class="form-control" ng-model="varaus.osoite" id="osoite" placeholder="Postiosoite" name="osoite">
             </div>
 
             <div class="form-group">
                 <label for="postiNumero">Postinumero:</label>
-                <input type="postiNumero" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
+                <input type="number" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
             </div>
 
         </div>
@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label for="sukunimi">Sukunimi:</label>
-                <input type="sukunimi" class="form-control" ng-model="varaus.sukunimi" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
+                <input type="text" class="form-control" ng-model="varaus.sukunimi" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
             </div>
 
             <div class="form-group">
@@ -38,14 +38,28 @@
 
             <div class="form-group">
                 <label for="postiToimipaikka">Postitoimipaikka:</label>
-                <input type="postiToimipaikka" class="form-control" ng-model="varaus.postiToimipaikka" id="postiToimipaikka" placeholder="Postitoimipaikka" name="postiToimipaikka">
+                <input type="text" class="form-control" ng-model="varaus.postiToimipaikka" id="postiToimipaikka" placeholder="Postitoimipaikka" name="postiToimipaikka">
             </div>
 
         </div>
         <div class="col-xs-12" id="maksutapa">
             <h2>Maksutapa</h2>
 
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-disabled="verkkomaksu==true" ng-model="varaus.lasku" name="remember">Lasku</label>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"  ng-disabled="varaus.lasku==true" ng-model="verkkomaksu" name="remember">Verkkopankki</label>
+            </div>
+
             <!--Maksutapa plugari tähän-->
+            <div ng-show="verkkomaksu == true" class="jumbotron">
+                <h2>Verkkopankkimaksu plugari</h2>
+            </div>
+            
 
         </div>
 

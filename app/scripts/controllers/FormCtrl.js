@@ -27,7 +27,7 @@ angular.module('xamkTilanvarausApp')
       })
       .then(function (response) { // Onnistunut http-kutsu (success)
           
-        console.log(response);
+        console.log(response.data);
                   
       }, function(response) { // Epäonnistunut http-kutsu (error)
           

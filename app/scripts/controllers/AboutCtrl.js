@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name xamkTilanvarausApp.controller:AboutCtrl
@@ -9,7 +7,6 @@
  */
 /* eslint-disable */
 
- 
 angular.module('xamkTilanvarausApp')
   .controller('AboutCtrl', function () {
     this.awesomeThings = [

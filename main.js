@@ -19,10 +19,15 @@ app.use((req, res, next) => {
 
 app.post("/tallenna", (req, res) => {
 
+
+    if(req.body.etunimi){
+        console.log(req.body.etunimi);
+    }
+    else{
+        res.send("Ei etunimeä");
+    }
+
     console.log(req.body);
-
-    
-
 });
 
 app.listen(8000, () => {
