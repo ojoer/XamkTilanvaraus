@@ -29,10 +29,14 @@ angular.module('xamkTilanvarausApp')
           
         console.log(response.data);
                   
-      }, function(response) { // Epäonnistunut http-kutsu (error)
-          
-          console.log("Ei yhteyttä");
-          
-      });
+      })
+      .catch(function (response) { // error
+        
+          $scope.virheteksti = response.data.virhe;
+          console.log(response.data)
+
+          $("#virheIkkuna").modal("show");
+
+      });;
     };
   });
