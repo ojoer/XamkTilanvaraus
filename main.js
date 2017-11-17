@@ -1,6 +1,9 @@
+/*eslint-disable */
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const varaukset = require("./models/varaukset");
 
 app.set("views", "./views");
 
@@ -17,7 +20,39 @@ app.use((req, res, next) => {
     
 });
 
-app.post("/tallenna", (req, res) => {
+app.post("/valiaikainenVaraus", (req, res) => {
+
+    varaukset.tallenna(req.body);
+    res.send("Onnistui");
+
+});
+
+app.post("/tallennaKalenteriin", (req, res) => {
+    
+        varaukset.tallennaAjat(req.body);
+        res.send("Onnistui");
+    
+    });
+
+app.post("/haeVarausTiedotLomakkeelle", (req, res) =>{
+
+    varaukset.haeLomakkeelle(req.body, (err, rows) => {
+        console.log(rows)
+        res.send(rows);
+    });
+
+});
+
+app.get("/haeVarausTiedot", (req, res) =>{
+    varaukset.haeAjat((err,varaukset)=>{
+        
+       console.log(varaukset)
+        res.send(varaukset);
+    });
+});
+
+app.post("/tallennaVaraus", (req, res) => {
+
 
     if ( (!req.body.etunimi) || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.etunimi) === false)) {
         res.statusCode = 500;
@@ -26,49 +61,53 @@ app.post("/tallenna", (req, res) => {
         return false;
     }
     
-    if (!req.body.sukunimi || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.sukunimi) === false)) {
+    else if (!req.body.sukunimi || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.sukunimi) === false)) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita sukunimesi. Sukunimi voi sisältää vain kirjaimia"});
 
         return false;
     }
 
-    if (!req.body.pnumero) {
+    else if (!req.body.pnumero) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita puhelinnumerosi"});
 
         return false;
     }
     
-    if (!req.body.email) {
+    else if (!req.body.email) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita sähköpostiosoitteesi tai tarkista oikeinkirjoitus"});
 
         return false;
     }
 
-    if (!req.body.osoite || (/^[a-zA-ZåäöÅÄÖ0-9]+$/.test(req.body.osoite) === false)) {
+    else if (!req.body.osoite || (/^[a-zA-ZåäöÅÄÖ0-9]+$/.test(req.body.osoite) === false)) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita osoitteesi"});
 
         return false;
     }
 
-    if (!req.body.postiNumero) {
+    else if (!req.body.postiNumero) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita postinumerosi"});
 
         return false;
     }
 
-    if (!req.body.postiToimipaikka || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.postiToimipaikka) === false)) {
+    else if (!req.body.postiToimipaikka || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.postiToimipaikka) === false)) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita postitoimipaikkasi"});
 
         return false;
     }
 
-    console.log(req.body);
+    else{
+        varaukset.tallennaTietokantaan(req.body);
+    }
+
+    
 });
 
 app.listen(8000, () => {

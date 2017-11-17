@@ -1,1 +1,29 @@
-<p>This is the about view.</p>
+<link href='./styles/kalenteri/fullcalendar.css' rel='stylesheet' />
+<link href='./styles/kalenteri/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='./scripts/kalenteri/moment.min.js'></script>
+<script src='./scripts/kalenteri/fullcalendar.js'></script>
+<script src='./scripts/kalenteri/locale-all.js'></script>
+<script src='./scripts/kalenteri/Main.js'></script>
+
+<div class="container">
+    <div id='calendar'></div>
+</div>
+
+<button ng-click="testi()">Siirry varaamaan</button>
+
+
+<style>
+    
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+            font-size: 14px;
+        }
+    
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    
+    </style>
