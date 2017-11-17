@@ -5,7 +5,7 @@ const mongoClient = mongodb.MongoClient;
 let db;
 
 
-mongoClient.connect("mongodb://localhost:27017/varaukset",(err,yhteys)=>{
+mongoClient.connect("mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.mlab.com:61745/varaukset",(err,yhteys)=>{
     db = yhteys;
     console.log("Yhteys MongoBD-tietokantaan avattu!");
     
@@ -24,6 +24,7 @@ module.exports = {
                 callback(err,result);
                 // db.collection("varaukset").drop();
                 // db.collection("valiaikaisetVaraukset").drop();
+                // db.collection("kalenteri").drop();
                 });
         },
 
