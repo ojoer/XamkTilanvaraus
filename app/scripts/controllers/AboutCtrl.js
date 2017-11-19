@@ -48,6 +48,7 @@ angular.module('xamkTilanvarausApp')
 
       localStorage.setItem("id", genId);
 
+      console.log(varaus);
       // 
           $http({
             method : "POST",
@@ -57,18 +58,18 @@ angular.module('xamkTilanvarausApp')
           })
           .then(function (response) { // Onnistunut http-kutsu (success)
               
-            
+            console.log(response);
                       
           })
           .catch(function (response) { // error
             
-              // $scope.virheteksti = response.data.virhe;
-              console.log(response.data)
+              $scope.virheteksti = response.data[0].virhe;
+              
     
-              // $("#virheIkkuna").modal("show");
+              $("#virheIkkuna").modal("show");
     
           });
-          $window.location.href = 'http://localhost:9000/#!/form'
+          // $window.location.href = 'http://localhost:9000/#!/form'
     };
     
   });

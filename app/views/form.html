@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label for="pnumero">Puhelinnumero:</label>
-                <input type="number" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
+                <input type="text" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
             </div>
 
             <div class="form-group">
@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 <label for="postiNumero">Postinumero:</label>
-                <input type="number" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
+                <input type="text" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
             </div>
 
         </div>
@@ -71,12 +71,12 @@
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-disabled="verkkomaksu==true" ng-model="varaus.lasku" name="remember">Lasku</label>
+                    <input type="checkbox" ng-disabled="varaus.verkkomaksu==true" ng-model="varaus.lasku" name="remember">Lasku</label>
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"  ng-disabled="varaus.lasku==true" ng-model="verkkomaksu" name="remember">Verkkopankki</label>
+                    <input type="checkbox"  ng-disabled="varaus.lasku==true" ng-model="varaus.verkkomaksu" name="remember">Verkkopankki</label>
             </div>
 
             <!--Maksutapa plugari tähän-->

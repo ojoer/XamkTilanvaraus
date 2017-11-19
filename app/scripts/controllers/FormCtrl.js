@@ -25,9 +25,6 @@ angular.module('xamkTilanvarausApp')
     .then(function (response) { // Onnistunut http-kutsu (success)
       
       $scope.yhteenveto = response.data;
-
-      
-      console.log($scope.yhteenveto)
                 
     })
     .catch(function (response) { // error
@@ -40,10 +37,17 @@ angular.module('xamkTilanvarausApp')
 
     $scope.myFunc = function() {
 
+      var data = {
+        lomake: $scope.varaus,
+        kalenteri: $scope.yhteenveto
+      }
+
+      console.log($scope.yhteenveto)
+
       $http({
         method : "POST",
         url : "http://localhost:8000/tallennaVaraus",
-        data:$scope.varaus
+        data: data
       })
       .then(function (response) { // Onnistunut http-kutsu (success)
           
@@ -53,28 +57,8 @@ angular.module('xamkTilanvarausApp')
       .catch(function (response) { // error
         
           $scope.virheteksti = response.data.virhe;
-          console.log(response.data)
 
           $("#virheIkkuna").modal("show");
-
-      });
-
-      $http({
-        method : "POST",
-        url : "http://localhost:8000/tallennaKalenteriin",
-        data:$scope.yhteenveto
-      })
-      .then(function (response) { // Onnistunut http-kutsu (success)
-          
-        console.log(response.data);
-                  
-      })
-      .catch(function (response) { // error
-        
-          // $scope.virheteksti = response.data.virhe;
-          // console.log(response.data)
-
-          // $("#virheIkkuna").modal("show");
 
       });
     };

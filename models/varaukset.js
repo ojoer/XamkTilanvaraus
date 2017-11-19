@@ -28,31 +28,73 @@ module.exports = {
                 });
         },
 
-        tallennaAjat : (data, err) => {
-               db.collection("kalenteri").insert(data);
-       },
-
-        haeLomakkeelle : (data, callback) => {
+        haeValiaikaisetAjat : (callback) => {
                 
-                db.collection("valiaikaisetVaraukset").find({'id':data.id}).toArray((err,result)=>{
-                        
-                callback(err,result);
-                  // db.collection("varaukset").drop();
+                db.collection("valiaikaisetVaraukset").find().toArray((err,result)=>{
+                        callback(err,result);
                 });
         },
 
-        tallenna : (data, err) => {
-                 if(err){
-                         throw err
-                 }
+        tarkistaOnkoValiaikaistaVarausta : (data, callback) => {
+                var ensimmainenPaiva = data.startit[0].start;
+                var pituus = data.startit.length -1;
+                var viimeinenPaiva = data.startit[pituus].start;
+
+                db.collection("valiaikaisetVaraukset").find({
+                        "startit.start": {$gte : ensimmainenPaiva, $lte: viimeinenPaiva}
+                }).toArray((err,result)=>{
+
+
+                        if(result.length === 0){
+                                console.log("Ei varauksia");
+                                db.collection("valiaikaisetVaraukset").insert(data);
+                                callback(err,result);
+                        }
+                        else{
+                                console.log("Tilaa " + result[0].tilaId + " ollaan jo varaamassa valitulle ajankohdalle");
+                                callback(err,result);
+                        }    
+                });
+
+
+                
+                },
+
+        tallennaValiaikainen : (data, err) => {
+                if(err){
+                        throw err
+                }
                 db.collection("valiaikaisetVaraukset").insert(data);
+        },
+
+        haeLomakkeelle : (data, callback) => {  
+        
+                db.collection("valiaikaisetVaraukset").find({'id':data.id}).toArray((err,result)=>{
+                        
+                callback(err,result);
+                // db.collection("varaukset").drop();
+                });
         },
 
         tallennaTietokantaan : (data, err) => {
                 if(err){
                         throw err
                 }
-               db.collection("varaukset").insert(data);
+                db.collection("varaukset").insert(data);
        },
+
+        tallennaAjat : (data, err) => {
+               db.collection("kalenteri").insert(data);
+        },
+
+        poistaValiaikaiset : (data, err) => {
+                db.collection("valiaikaisetVaraukset").remove({'id':data});
+        },
+
+        
+
+        
+
+        
 
 };
