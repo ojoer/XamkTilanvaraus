@@ -13,13 +13,16 @@ $(document).ready(function() {
             right: 'agendaWeek,agendaDay'
         },
         eventSources: [
-            
-                    // your event source
                     {
                         method : "get",
                         url : "http://localhost:8000/haeVarausTiedot",
                         color: 'red'
-                    }
+                    },
+                    {
+                        method : "get",
+                        url : "http://localhost:8000/haeValiaikaistenVarausTiedot",
+                        color: 'green'
+                    },
 
                 ],
         defaultDate: '2017-11-17',
