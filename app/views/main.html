@@ -18,24 +18,24 @@
 
   <div class="row">
     <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#">MIKPOLISALI</a>
+      <li ng-class="{'active':valittu === 'mikpoli'}" ng-click="valittu = 'mikpoli'">
+        <a>MIKPOLISALI</a>
       </li>
-      <li>
-        <a href="#">KUITULA</a>
+      <li ng-class="{'active':valittu === 'kuitula'}" ng-click="valittu = 'kuitula'">
+        <a>KUITULA</a>
       </li>
-      <li>
-        <a href="#">MB123</a>
+      <li ng-class="{'active':valittu === 'mb'}" ng-click="valittu = 'mb'">
+        <a>MB123</a>
       </li>
-      <li>
-        <a href="#">MA325</a>
+      <li ng-class="{'active':valittu === 'ma'}" ng-click="valittu = 'ma'">
+        <a>MA325</a>
       </li>
-      <li>
-        <a href="#">VINTTI</a>
+      <li ng-class="{'active':valittu === 'vintti'}" ng-click="valittu = 'vintti'">
+        <a>VINTTI</a>
       </li>
     </ul>
     <div class="content_3">
-
+      <p>{{valittu}}</p>
     </div>
   </div>
 </div>

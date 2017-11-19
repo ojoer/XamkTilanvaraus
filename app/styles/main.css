@@ -176,15 +176,22 @@ body {
     border-radius:4px
   }
 
-  .nav-tabs .active > a{
+  .nav-tabs .active{
     background-color:black !important;
     color: #fbba18 !important;
   }
 
-  .nav-tabs > li > a{
+  .nav-tabs .active > a{
+    background-color:black !important;
+    color: #fbba18 !important;
+    border-color: transparent !important;
+  }
+
+  .nav-tabs > li{
     color: #fbba18;
     font-size: 25px;
     background-color: rgb(233, 233, 233) !important;
+    border-bottom-right-radius: 0;
   }
 
   .content_1{
@@ -199,7 +206,6 @@ body {
   .content_3{
     min-height: 400px;
     background-color: black;
-    margin-left: 1px; 
   }
 
   .row{
@@ -215,5 +221,9 @@ body {
     height: 60px;
     margin-top: 10px;
     margin-left: 10px;
+  }
+
+  .content_3 > p{
+    color: white;
   }
 }
