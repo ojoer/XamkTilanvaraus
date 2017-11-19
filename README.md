@@ -51,7 +51,7 @@ Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 
 5. **!HUOM!** Seuraava komento on tarkoitettu ainoastaan julkaisua varten `grunt` 
 
-Tämän hetkinen toteutus toimii vain paikallisesti, eli koneella pitää olla mongodb asennettuna ja päällä. Nodejs palvelin pitää myös olla päällä (löytyy projektin juuresta komennolla `node main.js`).
+Tämän hetkinen toteutus toimii paikallisesti, mutta tietokannat löytyvät mLabin palvelimilta, joten varaukset löytyvät koneella kuin koneella. **!HUOM!** Nodejs palvelin pitää olla päällä (löytyy projektin juuresta komennolla `node main.js`).
 
 ### Tekniikat
 
