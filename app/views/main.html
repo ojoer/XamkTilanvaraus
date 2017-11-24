@@ -18,24 +18,87 @@
 
   <div class="row">
     <ul class="nav nav-tabs">
-      <li ng-class="{'active':valittu === 'mikpoli'}" ng-click="valittu = 'mikpoli'">
+      <li ng-class="{'active':valittu === 'Mikpolisali'}" ng-click="valittu = 'Mikpolisali'">
         <a>MIKPOLISALI</a>
       </li>
-      <li ng-class="{'active':valittu === 'kuitula'}" ng-click="valittu = 'kuitula'">
+      <li ng-class="{'active':valittu === 'Kuitula'}" ng-click="valittu = 'Kuitula'">
         <a>KUITULA</a>
       </li>
-      <li ng-class="{'active':valittu === 'mb'}" ng-click="valittu = 'mb'">
+      <li ng-class="{'active':valittu === 'MB123'}" ng-click="valittu = 'MB123'">
         <a>MB123</a>
       </li>
-      <li ng-class="{'active':valittu === 'ma'}" ng-click="valittu = 'ma'">
+      <li ng-class="{'active':valittu === 'MA325'}" ng-click="valittu = 'MA325'">
         <a>MA325</a>
       </li>
-      <li ng-class="{'active':valittu === 'vintti'}" ng-click="valittu = 'vintti'">
+      <li ng-class="{'active':valittu === 'Vintti'}" ng-click="valittu = 'Vintti'">
         <a>VINTTI</a>
       </li>
     </ul>
     <div class="content_3">
-      <p>{{valittu}}</p>
-    </div>
+
+        <p>{{valittu}}</p>
+
+      <div class="container" id="etusivuKalenteri">
+          <link href='./styles/kalenteri/fullcalendar.css' rel='stylesheet' />
+          <link href='./styles/kalenteri/fullcalendar.print.css' rel='stylesheet' media='print' />
+          <script src='./scripts/kalenteri/moment.min.js'></script>
+          <script src='./scripts/kalenteri/fullcalendar.js'></script>
+          <script src='./scripts/kalenteri/locale-all.js'></script>
+          <script src='./scripts/kalenteri/Main.js'></script>
+          
+          <div class="container">
+              <div id='calendar'></div>
+          </div>
+          
+          <button ng-click="testi()">Siirry varaamaan</button>
+          
+          <div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Virhe</h4>
+                      </div>
+                      <div class="modal-body">
+          
+                      {{ virheteksti }}
+          
+          
+                      </div>
+                      <div class="modal-footer">
+          
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                      </div>
+                  </div>
+              </div>
+              </div> 
+
+          
+        </div>
+</div>
+
+<div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Virhe</h4>
+          </div>
+          <div class="modal-body">
+
+          {{ virheteksti }}
+
+
+          </div>
+          <div class="modal-footer">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+          </div>
+      </div>
   </div>
+  </div> 
+
+</div>
+
+
 </div>

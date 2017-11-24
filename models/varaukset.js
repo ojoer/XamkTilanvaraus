@@ -18,19 +18,23 @@ mongoClient.connect("mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.ml
 
 module.exports = {
 
-        haeAjat : (callback) => {
-                
-                db.collection("kalenteri").find().toArray((err,result)=>{
-                callback(err,result);
+        haeAjat : (data, callback) => {
                 // db.collection("varaukset").drop();
                 // db.collection("valiaikaisetVaraukset").drop();
                 // db.collection("kalenteri").drop();
+                db.collection("kalenteri").find({
+                        'tilaId' : data
+                }).toArray((err,result)=>{
+                callback(err,result);
+                
                 });
         },
 
-        haeValiaikaisetAjat : (callback) => {
+        haeValiaikaisetAjat : (data, callback) => {
                 
-                db.collection("valiaikaisetVaraukset").find().toArray((err,result)=>{
+                db.collection("valiaikaisetVaraukset").find({
+                        'tilaId' : data
+                }).toArray((err,result)=>{
                         callback(err,result);
                 });
         },
@@ -41,7 +45,8 @@ module.exports = {
                 var viimeinenPaiva = data.startit[pituus].start;
 
                 db.collection("valiaikaisetVaraukset").find({
-                        "startit.start": {$gte : ensimmainenPaiva, $lte: viimeinenPaiva}
+                        "startit.start": {$gte : ensimmainenPaiva, $lte: viimeinenPaiva},
+                        "tilaId": data.tilaId
                 }).toArray((err,result)=>{
 
 

@@ -5,6 +5,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const varaukset = require("./models/varaukset");
 
+const Holidays = require('date-holidays')
+var hd = new Holidays()
+
 app.set("views", "./views");
 
 app.use(bodyParser.json());
@@ -20,15 +23,19 @@ app.use((req, res, next) => {
     
 });
 
-app.get("/haeVarausTiedot", (req, res) =>{
-    varaukset.haeAjat((err,varaukset)=>{
-        
+hd = new Holidays('FI');
+
+
+app.post("/haeVarausTiedot", (req, res) =>{
+
+    varaukset.haeAjat(req.body.tilaId, (err,varaukset)=>{
+
         res.send(varaukset);
     });
 });
 
-app.get("/haeValiaikaistenVarausTiedot", (req, res) =>{
-    varaukset.haeValiaikaisetAjat((err,varaukset)=>{
+app.post("/haeValiaikaistenVarausTiedot", (req, res) =>{
+    varaukset.haeValiaikaisetAjat(req.body.tilaId,(err,varaukset)=>{
         
         res.send(varaukset);
     });
@@ -39,6 +46,30 @@ app.get("/haeValiaikaistenVarausTiedot", (req, res) =>{
 app.post("/valiaikainenVaraus", (req, res) => {
 
     var data =req.body;
+    var tuntiHinta;
+
+    console.log(data[0])
+
+
+    if(data[0].tilaId == "Mikpolisali"){
+        tuntiHinta = 160.00;
+    }
+
+    if(data[0].tilaId == "Kuitula"){
+        tuntiHinta = 200.00;
+    }
+
+    if(data[0].tilaId == "MB123"){
+        tuntiHinta = 60.00;
+    }
+
+    if(data[0].tilaId == "MA325"){
+        tuntiHinta = 80.00;
+    }
+
+    if(data[0].tilaId == "Vintti"){
+        tuntiHinta = 90.00;
+    }
 
     for(var i = 0; i<req.body.length;i++){
 
@@ -47,6 +78,8 @@ app.post("/valiaikainenVaraus", (req, res) => {
         var aloitus = parseInt(req.body[i].start.slice(11,13))-1;
         var lopetus = parseInt(req.body[i].end.slice(11,13))-1;
         var loopMaara = lopetus - aloitus;
+
+        data[i].hinta = tuntiHinta * loopMaara;
 
         for(var j = 0; j<loopMaara;j++){
             
@@ -73,24 +106,53 @@ app.post("/valiaikainenVaraus", (req, res) => {
 
     }
 
-    var virheet = [];
+    console.log("Tämä on eka for loop");
+
+
+    
+
+    
     
      for(var i = 0; i < data.length;i++){
+
 
         varaukset.tarkistaOnkoValiaikaistaVarausta(data[i], (err, rows) => {
             if(rows.length === 0){
                 return true;
             }
             else if(rows.length != 0){
-                virheet.push({
-                    virhe: "Tilaa ollaan jo varaamassa ajankohdalle: " + rows[0].start + " - " + rows[0].end + ". Lataa sivu uudestaan nähdäksesi tuoreimman varaustilanteen."
-                });
-                res.statusCode =500;
-                res.end(JSON.stringify(virheet));
+
+                var virhe = "Tilaa ollaan jo varaamassa ajankohdalle: " + rows[0].start + " - " + rows[0].end + ". Lataa sivu uudestaan nähdäksesi tuoreimman varaustilanteen."
+
+                lahetaVastaus(virhe);
+                
             }
-            
+
         });
-    }console.log(virheet)
+ 
+    }
+
+    var virheet = [];
+    var asd = 0;
+    var lahetaVastaus = function(virheTeksti){
+        
+        asd++;
+        console.log(asd)
+
+        if(virheTeksti.length > 0){
+            virheet.push({
+                virhe: virheTeksti
+            });
+            if(asd == data.length){
+                
+                res.statusCode =500;
+                res.end(JSON.stringify( virheet) );
+                asd = 0;
+            }
+        }
+
+        
+    };
     
 
 });

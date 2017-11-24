@@ -15,6 +15,17 @@ angular.module('xamkTilanvarausApp')
       'Karma'
     ];
 
+    $scope.roles = [
+      'guest', 
+      'user', 
+      'customer', 
+      'admin'
+    ];
+
+    $scope.user = {
+      roles: ['user']
+    };
+
     $http({
       method: "POST",
       url: "http://localhost:8000/haeVarausTiedotLomakkeelle",
@@ -23,6 +34,7 @@ angular.module('xamkTilanvarausApp')
       .then(function (response) { // Onnistunut http-kutsu (success)
 
         $scope.yhteenveto = response.data;
+        console.log($scope.yhteenveto)
 
       })
       .catch(function (response) { // error
@@ -35,34 +47,29 @@ angular.module('xamkTilanvarausApp')
 
     $scope.myFunc = function () {
 
+      console.log($scope.varaus);
+
       var data = {
         lomake: $scope.varaus,
         kalenteri: $scope.yhteenveto
       }
 
-      console.log($scope.yhteenveto)
+      // $http({
+      //   method: "POST",
+      //   url: "http://localhost:8000/tallennaVaraus",
+      //   data: data
+      // })
+      //   .then(function (response) { // Onnistunut http-kutsu (success)
 
-      $http({
-        method: "POST",
-        url: "http://localhost:8000/tallennaVaraus",
-        data: data
-      })
-        .then(function (response) { // Onnistunut http-kutsu (success)
+      //     console.log(response.data);
 
-          console.log(response.data);
+      //   })
+      //   .catch(function (response) { // error
 
-        })
-        .then(function (response) { // Onnistunut http-kutsu (success)
+      //     $scope.virheteksti = response.data.virhe;
 
-          console.log(response.data);
+      //     $("#virheIkkuna").modal("show");
 
-        })
-        .catch(function (response) { // error
-
-          $scope.virheteksti = response.data.virhe;
-
-          $("#virheIkkuna").modal("show");
-
-        });
+      //   });
     };
   });

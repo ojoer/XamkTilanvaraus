@@ -15,14 +15,9 @@ $(document).ready(function() {
         eventSources: [
                     {
                         method : "get",
-                        url : "http://localhost:8000/haeVarausTiedot",
+                        url : "http://localhost:9000/scripts/kalenteri/juhlapaivat.json",
                         color: 'red'
-                    },
-                    {
-                        method : "get",
-                        url : "http://localhost:8000/haeValiaikaistenVarausTiedot",
-                        color: 'green'
-                    },
+                    }
 
                 ],
         defaultDate: '2017-11-17',

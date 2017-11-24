@@ -205,7 +205,7 @@ body {
 
   .content_3{
     min-height: 400px;
-    background-color: black;
+    background-color: white;
   }
 
   .row{
@@ -224,6 +224,10 @@ body {
   }
 
   .content_3 > p{
-    color: white;
+    color: black;
+  }
+
+  #etusivuKalenteri{
+    margin-top:200px;
   }
 }
