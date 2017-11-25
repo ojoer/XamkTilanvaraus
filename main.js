@@ -122,8 +122,6 @@ app.post("/valiaikainenVaraus", (req, res) => {
 
     }
 
-    console.log("Tämä on eka for loop");
-
      for(var i = 0; i < data.length;i++){
 
 
@@ -178,6 +176,13 @@ app.post("/tallennaKalenteriin", (req, res) => {
 app.post("/haeVarausTiedotLomakkeelle", (req, res) =>{
 
     varaukset.haeLomakkeelle(req.body, (err, rows) => {
+        console.log(rows);
+        var i;
+        
+        for (i = 0; i < rows.length; i++) {
+            rows[i].start = dateFormat(rows[i].start, "dddd, d.m.yyyy, HH:MM");
+            rows[i].end = dateFormat(rows[i].end, "dddd, d.m.yyyy, HH:MM");
+        }
         res.send(rows);
     });
 
@@ -186,8 +191,16 @@ app.post("/haeVarausTiedotLomakkeelle", (req, res) =>{
 
 
 app.post("/tallennaVaraus", (req, res) => {
+    console.log(req.body)
 
-    if ( (!req.body.lomake.etunimi) || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.lomake.etunimi) === false)) {
+    if (req.body.kalenteri.length == 0) {
+        res.statusCode = 500;
+        res.send({virhe: "Tiloja ei ole valittu. Ole hyvä ja siiry etusivulle aloittaaksesi varauksen teon."});
+
+        return false;
+    }
+
+    else if ( (!req.body.lomake.etunimi) || (/^[a-zA-ZåäöÅÄÖ]+$/.test(req.body.lomake.etunimi) === false)) {
         res.statusCode = 500;
         res.send({virhe: "Kirjoita etunimesi. Etunimi voi sisältää vain kirjaimia"});
 
@@ -248,16 +261,25 @@ app.post("/tallennaVaraus", (req, res) => {
         return false;
     }
 
-    else{
+    else {
 
+        var i;
         
+        for (i = 0; i < req.body.kalenteri.length; i++) {
+            req.body.kalenteri[i].start = dateFormat(req.body.kalenteri[i].start, "yyyy-dd-mm'T'HH:MM:ss");
+            req.body.kalenteri[i].end = dateFormat(req.body.kalenteri[i].end, "yyyy-dd-mm'T'HH:MM:ss");
+        }
+
         var lomakeData = req.body.lomake;
         lomakeData.id = req.body.kalenteri[0].id;
         lomakeData.tilaId = req.body.kalenteri[0].tilaId;
-        lomakeData.start = req.body.kalenteri[0].start;
-        lomakeData.end = req.body.kalenteri[0].end;
 
-        console.log(lomakeData);
+        
+        
+        varaukset.tallennaTietokantaan(lomakeData);
+        varaukset.tallennaAjat(req.body.kalenteri);
+        varaukset.poistaValiaikaiset(req.body.kalenteri[0].id);
+
         var emailTeksti = "";
         var i;
         for (i = 0; i < req.body.kalenteri.length; i++) {
@@ -304,12 +326,6 @@ app.post("/tallennaVaraus", (req, res) => {
         + '<p>' + lomakeData.maksutapa + '</p>' + 
 
         '</div>';
-        
-       
-        console.log(emailTeksti);
-        varaukset.tallennaTietokantaan(lomakeData);
-        varaukset.tallennaAjat(req.body.kalenteri);
-        varaukset.poistaValiaikaiset(req.body.kalenteri[0].id);
 
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -345,15 +361,18 @@ app.post("/tallennaVaraus", (req, res) => {
 app.post("/haeAsiakkaanAjat", (req, res) =>{
     
     varaukset.haeAsiakkaanTiedot(req.body.id, (err,tiedot)=>{
-        lisaaVaraukset(tiedot);
+        if(tiedot.length > 0){
+            lisaaVaraukset(tiedot);
+            varaukset.haeAsiakkaanAjat(req.body.id, (err,ajat)=>{
+                lisaaVaraukset(ajat);
+            });
+        }
+        else if(tiedot.length == 0){
+            res.statusCode = 500;
+            res.send({virhe: "Varaustietoja ei löydy. Tarkista varaustunnuksesi"});
+        }
 
-        varaukset.haeAsiakkaanAjat(req.body.id, (err,ajat)=>{
-            lisaaVaraukset(ajat);
-            // res.send(varaukset);
-        });
     });
-
-    
 
     var varaustiedot = {};
     var dsa = 0;
@@ -381,12 +400,13 @@ app.post("/haeAsiakkaanAjat", (req, res) =>{
             for (i = 0; i < dataaaaa.length; i++) {
                 varaustiedot.ajat.push(
                     {
-                        alkaa: dateFormat(dataaaaa[i].start, "dddd, d.m.yyyy, 'klo' HH:MM"),
-                        loppuu: dateFormat(dataaaaa[i].end, "dddd, d.m.yyyy, 'klo' HH:MM"),
+                        alkaa: dateFormat(dataaaaa[i].start, "dddd, d.m.yyyy, HH:MM"),
+                        loppuu: dateFormat(dataaaaa[i].end, "dddd, d.m.yyyy, HH:MM"),
                         hinta: dataaaaa[i].hinta
                     }
                 );
             }
+
             res.send(varaustiedot);
             
         }
@@ -395,6 +415,55 @@ app.post("/haeAsiakkaanAjat", (req, res) =>{
     };
 
     
+});
+
+app.post("/poistaAsiakkaanVaraukset", (req, res) =>{
+
+    var poistettu = 0;
+
+    for (i = 0; i < req.body.varaukset.ajat.length; i++) {
+        if(req.body.varaukset.ajat[i].selected){
+            poistettu++;
+            var data = {
+                id : req.body.varaukset.id,
+                start: dateFormat(req.body.varaukset.ajat[i].alkaa, "yyyy-dd-mm'T'HH:MM:ss"),
+                end: dateFormat(req.body.varaukset.ajat[i].loppuu, "yyyy-dd-mm'T'HH:MM:ss")
+            }
+
+            // var now = new Date();
+            // now.setDate(now.getDate()+7);
+            // dateFormat(now, "yyyy-dd-mm'T'HH:MM:ss");
+            // var testi = Date.parse(data.start);
+            // console.log(testi);
+            // testi.getDate();
+            // // if(now.getDate()+7 )
+
+
+            varaukset.poistaAsiakkaanVarauksetKalenterista(data);
+        }
+
+        else{
+            console.log("Tätä ei poisteta");
+        }
+        
+    }
+
+    console.log(poistettu);
+    if(poistettu == 0){
+            res.statusCode = 500;
+            res.send({virhe: "Valitse peruutettavat ajat"});
+    }
+
+    else if(req.body.varaukset.ajat.length == poistettu){
+        varaukset.poistaAsiakkaanVaraukset(req.body.varaukset.id);
+        res.send("Kaikki varaukset poistettu");
+    }
+
+    else{
+        res.send("Valitut varaukset on poistettu");
+    }
+    
+
 });
 
 app.listen(8000, () => {

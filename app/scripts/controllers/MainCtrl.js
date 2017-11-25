@@ -101,8 +101,7 @@ angular.module('xamkTilanvarausApp')
                   tilaId : tilaId,
                   start: $('#calendar').fullCalendar( 'clientEvents', function(event){    return event.isNew == true;    })[i].start,
                   end: $('#calendar').fullCalendar( 'clientEvents', function(event){      return event.isNew == true;    })[i].end,
-                  otsikko: $('#calendar').fullCalendar( 'clientEvents', function(event){  return event.isNew == true;    })[i].title,
-                  valiaikainen: true
+                  otsikko: $('#calendar').fullCalendar( 'clientEvents', function(event){  return event.isNew == true;    })[i].title
                 })
             }
       

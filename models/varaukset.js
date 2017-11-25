@@ -108,6 +108,22 @@ module.exports = {
                 }).toArray((err,result)=>{
                         callback(err,result);
                 });
+        },
+
+        poistaAsiakkaanVarauksetKalenterista : (data, err) => {
+                console.log(data);
+                db.collection("kalenteri").remove({
+                        'id':data.id,
+                        'start':data.start,
+                        'end':data.end        
+                });
+        },
+
+        poistaAsiakkaanVaraukset : (data, err) => {
+                console.log("data");
+                db.collection("varaukset").remove({
+                        'id':data,        
+                });
         }
 
 };

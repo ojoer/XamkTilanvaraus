@@ -33,8 +33,16 @@ angular.module('xamkTilanvarausApp')
     })
       .then(function (response) { // Onnistunut http-kutsu (success)
 
-        $scope.yhteenveto = response.data;
-        console.log($scope.yhteenveto)
+        if(response.data.length == 0){
+          $scope.eiTiloja = true;
+          $scope.virheteksti = "Tiloja ei ole valittu. Ole hyvä ja siiry etusivulle aloittaaksesi varauksen teon.";
+          
+                  $("#virheIkkuna").modal("show");
+        }
+
+        else{
+          $scope.yhteenveto = response.data;
+        }
 
       })
       .catch(function (response) { // error
@@ -61,7 +69,8 @@ angular.module('xamkTilanvarausApp')
       })
         .then(function (response) { // Onnistunut http-kutsu (success)
 
-          console.log(response.data);
+          console.log("Kiitos varauksestasi");
+          localStorage.clear();
 
         })
         .catch(function (response) { // error
