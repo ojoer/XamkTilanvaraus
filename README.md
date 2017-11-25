@@ -53,6 +53,8 @@ Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 
 Tämän hetkinen toteutus toimii paikallisesti, mutta tietokannat löytyvät mLabin palvelimilta, joten varaukset löytyvät koneella kuin koneella. **!HUOM!** Nodejs palvelin pitää olla päällä (löytyy projektin juuresta komennolla `node main.js`).
 
+Sähköpostin lähettäminen paikalliselta palvelimelta vaatii koneen palomuurin sulkemista.
+
 ### Tekniikat
 
 Käytämme AngularJS, HTML5, CSS3
