@@ -4,6 +4,22 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const varaukset = require("./models/varaukset");
+const nodemailer = require("nodemailer");
+const dateFormat = require('dateformat');
+
+dateFormat.i18n  = {
+    dayNames: [
+        'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su',
+        'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'
+    ],
+    monthNames: [
+        'Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'elo', 'Syys', 'Loka', 'Marras', 'Joulu',
+        'Tammikuu', 'Helmikuu', 'Maaliskuu', 'HuhtiKuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Huhtikuu'
+    ],
+    timeNames: [
+        'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
+    ]
+};
 
 const Holidays = require('date-holidays')
 var hd = new Holidays()
@@ -22,6 +38,8 @@ app.use((req, res, next) => {
     next();
     
 });
+
+
 
 hd = new Holidays('FI');
 
@@ -100,19 +118,12 @@ app.post("/valiaikainenVaraus", (req, res) => {
 
 
             data[i].startit.push({start:yhdistys});
-            
-
         }
 
     }
 
     console.log("Tämä on eka for loop");
 
-
-    
-
-    
-    
      for(var i = 0; i < data.length;i++){
 
 
@@ -239,18 +250,149 @@ app.post("/tallennaVaraus", (req, res) => {
 
     else{
 
+        
         var lomakeData = req.body.lomake;
         lomakeData.id = req.body.kalenteri[0].id;
         lomakeData.tilaId = req.body.kalenteri[0].tilaId;
         lomakeData.start = req.body.kalenteri[0].start;
         lomakeData.end = req.body.kalenteri[0].end;
 
+        console.log(lomakeData);
+        var emailTeksti = "";
+        var i;
+        for (i = 0; i < req.body.kalenteri.length; i++) {
+            emailTeksti += '<p>' +  dateFormat(req.body.kalenteri[i].start, "dddd, d.m.yyyy, 'klo' HH:MM") + ' - ' + dateFormat(req.body.kalenteri[i].end, "dddd, d.m.yyyy, 'klo' h:MM") + '</p>'  
+        }
+
+        if(lomakeData.lasku == true){
+            lomakeData.maksutapa = "Lasku"
+        }
+        else if(lomakeData.verkkomaksu == true){
+            lomakeData.maksutapa = "Verkkomaksu"
+        }
+
+        var emailPohja = '<div>' + 
+        '<h3>Varauttu tila:</h3>' +
+        '<p>' + lomakeData.tilaId + '</p>' +
+
+        '<h3>Tilauksen tunnus:</h3>' +
+        '<p>' + lomakeData.id + '</p>' +
+
+        '<h3>Päivämäärä(t):</h3>' +
+        emailTeksti +
+
+        '<h3>Varaajan yhteystiedot:</h3>' +
+        '<h4>Etunimi:</h4>'
+        + '<p>' + lomakeData.etunimi + '</p>' + 
+
+        '<h4>Sukunimi:</h4>'
+        + '<p>' + lomakeData.sukunimi + '</p>' + 
+        
+        '<h4>Puhelinnumero:</h4>'
+        + '<p>' + lomakeData.pnumero + '</p>' + 
+
+        '<h4>Osoite:</h4>'
+        + '<p>' + lomakeData.osoite + '</p>' + 
+
+        '<h4>Postitoimipaikka:</h4>'
+        + '<p>' + lomakeData.postiToimipaikka + '</p>' + 
+
+        '<h4>Postinumero:</h4>'
+        + '<p>' + lomakeData.postiNumero + '</p>' + 
+
+        '<h4>Maksutapa:</h4>'
+        + '<p>' + lomakeData.maksutapa + '</p>' + 
+
+        '</div>';
+        
+       
+        console.log(emailTeksti);
         varaukset.tallennaTietokantaan(lomakeData);
         varaukset.tallennaAjat(req.body.kalenteri);
         varaukset.poistaValiaikaiset(req.body.kalenteri[0].id);
 
-       
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            requireTLS: true,
+            auth: {
+              user: 'XamkTilanvaraus@gmail.com',
+              pass: 'XamkTilanvarausSalis'
+            }
+          });
+
+        var mailOptions = {
+            from: 'XamkTilanvaraus@gmail.com',
+            to: 'jartsun@gmail.com',
+            subject: 'Tilausvahvistus',
+            text: "Tilausvahvistuksen tiedot",
+            html: emailPohja
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error.message);
+            } else {
+              console.log('Tilausvahvistus lähetetty: ' + info.response);
+            }
+          });
+ 
     }
+
+});
+
+app.post("/haeAsiakkaanAjat", (req, res) =>{
+    
+    varaukset.haeAsiakkaanTiedot(req.body.id, (err,tiedot)=>{
+        lisaaVaraukset(tiedot);
+
+        varaukset.haeAsiakkaanAjat(req.body.id, (err,ajat)=>{
+            lisaaVaraukset(ajat);
+            // res.send(varaukset);
+        });
+    });
+
+    
+
+    var varaustiedot = {};
+    var dsa = 0;
+    var lisaaVaraukset = function(dataaaaa){
+     
+        dsa++;
+        if(dsa == 1){
+            
+            varaustiedot.tilaId = dataaaaa[0].tilaId,
+            varaustiedot.id = dataaaaa[0].id,
+            varaustiedot.etunimi = dataaaaa[0].etunimi,
+            varaustiedot.sukunimi = dataaaaa[0].sukunimi,
+            varaustiedot.pnumero = dataaaaa[0].pnumero,
+            varaustiedot.email = dataaaaa[0].email,
+            varaustiedot.osoite = dataaaaa[0].osoite,
+            varaustiedot.postiNumero = dataaaaa[0].postiNumero,
+            varaustiedot.postiToimipaikka = dataaaaa[0].postiToimipaikka,
+            varaustiedot.maksutapa = dataaaaa[0].maksutapa
+        }
+        
+        if(dsa == 2){
+            var i;
+            varaustiedot.ajat = [];
+            
+            for (i = 0; i < dataaaaa.length; i++) {
+                varaustiedot.ajat.push(
+                    {
+                        alkaa: dateFormat(dataaaaa[i].start, "dddd, d.m.yyyy, 'klo' HH:MM"),
+                        loppuu: dateFormat(dataaaaa[i].end, "dddd, d.m.yyyy, 'klo' HH:MM"),
+                        hinta: dataaaaa[i].hinta
+                    }
+                );
+            }
+            res.send(varaustiedot);
+            
+        }
+        
+        
+    };
 
     
 });

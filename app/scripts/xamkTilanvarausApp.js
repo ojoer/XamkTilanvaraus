@@ -32,6 +32,11 @@ angular
         controller: 'FormCtrl',
         controllerAs: 'form'
       })
+      .when('/peruuta', {
+        templateUrl: 'views/peruuta.html',
+        controller: 'PeruutaCtrl',
+        controllerAs: 'peruuta'
+      })
       .otherwise({
         redirectTo: '/'
       });

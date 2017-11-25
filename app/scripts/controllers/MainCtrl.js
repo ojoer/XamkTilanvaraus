@@ -133,4 +133,10 @@ angular.module('xamkTilanvarausApp')
                 });
                 
           };
+
+          $scope.tyhjenna = function() {
+
+            $('#calendar').fullCalendar( 'removeEvents', function(event){    return event.isNew == true;   });
+
+          }
   });

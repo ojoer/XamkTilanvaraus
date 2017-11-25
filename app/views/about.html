@@ -1,50 +1,35 @@
-<link href='./styles/kalenteri/fullcalendar.css' rel='stylesheet' />
-<link href='./styles/kalenteri/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='./scripts/kalenteri/moment.min.js'></script>
-<script src='./scripts/kalenteri/fullcalendar.js'></script>
-<script src='./scripts/kalenteri/locale-all.js'></script>
-<script src='./scripts/kalenteri/Main.js'></script>
+<div>
+        <h3>Varauttu tila:</h3>
+        <p>lomakeData.tilaId</p>
 
-<div class="container">
-    <div id='calendar'></div>
+        <h3>Päivämäärä:</h3>
+        <p>lomakeData.start - lomakeData.end</p>
+
+        <h3>Valitut lisäpalvelut:</h3>
+        <p>lomakeData.lisapalvelut</p>
+        <p>lomakeData.lisapalvelut</p>
+        <p>lomakeData.lisapalvelut</p>
+
+        <h3>Varaajan yhteystiedot:</h3>
+        <h4>Etunimi:</h4>
+        <p>lomakeData.Etunimi</p>
+
+        <h4>Sukunimi:</h4>
+        <p>lomakeData.Sukunimi</p>
+        
+        <h4>Puhelinnumero:</h4>
+        <p>lomakeData.Puhelinnumero</p>
+
+        <h4>Osoite:</h4>
+        <p>lomakeData.Osoite</p>
+
+        <h4>Postitoimipaikka:</h4>
+        <p>lomakeData.Postitoimipaikka</p>
+
+        <h4>Postinumero:</h4>
+        <p>lomakeData.Postinumero</p>
+
+        <h4>Maksutapa:</h4>
+        <p>lomakeData.Maksutapa</p>
+
 </div>
-
-<button ng-click="testi()">Siirry varaamaan</button>
-
-<div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Virhe</h4>
-            </div>
-            <div class="modal-body">
-
-            {{ virheteksti }}
-
-
-            </div>
-            <div class="modal-footer">
-
-            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-            </div>
-        </div>
-    </div>
-    </div> 
-
-
-<style>
-    
-        body {
-            margin: 40px 10px;
-            padding: 0;
-            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-            font-size: 14px;
-        }
-    
-        #calendar {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-    
-    </style>

@@ -61,8 +61,6 @@ module.exports = {
                         }    
                 });
 
-
-                
                 },
 
         tallennaValiaikainen : (data, err) => {
@@ -96,10 +94,20 @@ module.exports = {
                 db.collection("valiaikaisetVaraukset").remove({'id':data});
         },
 
-        
+        haeAsiakkaanTiedot : (data, callback) => {
+                db.collection("varaukset").find({
+                        'id' : data
+                }).toArray((err,result)=>{
+                        callback(err,result);
+                });
+        },
 
-        
-
-        
+        haeAsiakkaanAjat : (data, callback) => {
+                db.collection("kalenteri").find({
+                        'id' : data
+                }).toArray((err,result)=>{
+                        callback(err,result);
+                });
+        }
 
 };
