@@ -126,6 +126,46 @@ module.exports = {
                 db.collection("varaukset").remove({
                         'id':data,        
                 });
-        }
+        },
+
+        kirjauduSisaan : (data, callback) => {
+                db.collection("henkilokunta").find({
+                        'tunnus' : data.tunnus,
+                        'salasana' : data.salasana
+                }).toArray((err,result)=>{
+                        callback(err,result);
+                });
+        },
+
+        haeAdminVaraukset : (callback) => {
+                db.collection("varaukset").find().toArray((err,result)=>{
+                        console.log(result);
+                        callback(err,result);
+                });
+         },
+
+         poistaKokoVaraus : (data, callback) => {
+                db.collection("varaukset").remove({
+                        'id' : data.id
+                });
+                
+                db.collection("varaukset").remove({
+                        'id' : data.id
+                }).toArray((err,result)=>{
+                        console.log(result);
+                });
+         },
+
+         poistaYksittainenVaraus : (data, callback) => {
+                
+                db.collection("varaukset").update(
+                        {},
+                        { $pull: 
+                                { varaukset: 
+                                        { $in: [data.aikatiedot] }
+                                } 
+                        }
+                )
+         },
 
 };

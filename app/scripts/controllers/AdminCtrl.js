@@ -37,7 +37,6 @@ $scope.vahvista = function (){
         tunnus: $scope.kayttaja,
         salasana: $scope.salasana
       }
-      console.log(data);
 
       $http({
         method: "POST",
@@ -46,7 +45,9 @@ $scope.vahvista = function (){
       })
         .then(function (response) { // Onnistunut http-kutsu (success)
 
-          console.log(response.data);
+          if(response.data){
+            $window.location.href = 'http://localhost:9000/#!/adminEtusivu'
+          }
           // $scope.piilotaTiedot = false;
           // $scope.varaukset = response.data;
           

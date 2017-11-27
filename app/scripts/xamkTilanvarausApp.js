@@ -42,6 +42,11 @@ angular
         controller: 'AdminCtrl',
         controllerAs: 'admin'
       })
+      .when('/adminEtusivu', {
+        templateUrl: 'views/adminEtusivu.html',
+        controller: 'AdminHallintaCtrl',
+        controllerAs: 'adminHallinta'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -33,6 +33,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
+app.use(session({
+    secret : "kissakala",
+    resave : false,
+    saveUninitialized : false,
+    store: new MongoStore({ url: "mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.mlab.com:61745/varaukset" }),
+    cookie: {maxAge: 60},
+    ttl: 60
+}));
+
 app.use((req, res, next) => {
     
     res.header("Access-Control-Allow-Origin", "*");
@@ -42,13 +51,7 @@ app.use((req, res, next) => {
     
 });
 
-app.use(session({
-    secret : "kissakala",
-    resave : false,
-    saveUninitialized : false,
-    store: new MongoStore({ url: "mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.mlab.com:61745/varaukset" }),
-    cookie: {maxAge: 60}
-}));
+
 
 
 
@@ -279,15 +282,26 @@ app.post("/tallennaVaraus", (req, res) => {
     else {
 
         var i;
-        
-        for (i = 0; i < req.body.kalenteri.length; i++) {
-            req.body.kalenteri[i].start = dateFormat(req.body.kalenteri[i].start, "yyyy-dd-mm'T'HH:MM:ss");
-            req.body.kalenteri[i].end = dateFormat(req.body.kalenteri[i].end, "yyyy-dd-mm'T'HH:MM:ss");
-        }
 
         var lomakeData = req.body.lomake;
         lomakeData.id = req.body.kalenteri[0].id;
         lomakeData.tilaId = req.body.kalenteri[0].tilaId;
+        lomakeData.varaukset = [];
+        console.log(lomakeData);
+        for (i = 0; i < req.body.kalenteri.length; i++) {
+            // Vittusaatana
+            // req.body.kalenteri[i].start = dateFormat(req.body.kalenteri[i].start, "yyyy-dd-mm'T'HH:MM:ss");
+            // req.body.kalenteri[i].end = dateFormat(req.body.kalenteri[i].end, "yyyy-dd-mm'T'HH:MM:ss");
+
+            lomakeData.varaukset.push({
+                start : req.body.kalenteri[i].start,
+                end : req.body.kalenteri[i].end,
+                hinta : req.body.kalenteri[i].hinta
+            })
+
+        }
+
+        
 
         
         
@@ -487,11 +501,64 @@ app.post("/poistaAsiakkaanVaraukset", (req, res) =>{
 });
 
 app.post("/adminKirjaudu", (req, res) =>{
-    console.log(req.body);
+
+    let kirjautumisTiedot = req.body;
+    
+    kirjautumisTiedot.salasana = crypto.createHash("SHA256").update(req.body.salasana).digest("hex");
 
 
+
+    varaukset.kirjauduSisaan(kirjautumisTiedot, (err,tiedot)=>{
+        if(err){
+            console.log(err)
+        }
+
+        else if(tiedot.length == 0){
+            
+            res.statusCode = 500;
+            res.send({virhe: "Käyttäjätunnus tai salasana virheellinen. Tarkista oikeinkirjoitus."});
+
+        }
+
+        else if(tiedot.length == 1){
+            req.session.tunnus = tiedot[0].tunnus;
+            res.send('asd');
+            
+        }
+    });
 
 });
+
+app.get("/haeAdminVaraukset", (req, res) =>{
+
+
+    varaukset.haeAdminVaraukset((err,varaukset)=>{
+        console.log(varaukset);
+        res.send(varaukset);
+
+    });
+
+});
+
+app.post("/poistaKokoVaraus", (req, res) =>{
+
+console.log(req.body);
+
+    varaukset.poistaKokoVaraus(req.body, (err,varaukset)=>{
+                // res.send(varaukset);
+            });
+
+});
+
+app.post("/poistaYksittainenVaraus", (req, res) =>{
+    
+    console.log(req.body);
+    
+        varaukset.poistaYksittainenVaraus(req.body, (err,varaukset)=>{
+                    // res.send(varaukset);
+                });
+    
+    });
 
 app.listen(8000, () => {
     
