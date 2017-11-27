@@ -35,18 +35,13 @@ body {
   width:100%
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 4px;
+  position:fixed;
+  width: 100%;
+  z-index: 1;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -86,6 +81,10 @@ body {
   margin-top: 28px;
 }
 
+.content-body{
+  padding-top:6%;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
@@ -108,6 +107,7 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
 
   .navbar-default{
     background-color: #000 !important;
@@ -124,21 +124,30 @@ body {
     color: #fff !important;
   }
 
-  .navbar-default .navbar-nav :hover{
+  .navbar-default .navbar-nav :hover a{
     background-color: #fbba18 !important;
     color: black !important;
   }
 
-  .navbar-default .navbar-nav > .active :hover{
-    color: black !important;
+  .navbar-default .navbar-nav :hover{
+    background-color: #fbba18 !important;
   }
 
   .navbar-default .navbar-nav > .active > a{
     background-color: inherit;
   }
 
+  .navbar-default > .navbar-nav > .active :hover a{
+    color: black !important;
+  }
+
   .navbar-default .navbar-nav > .active > a{
     color: #fbba18 !important;
+  }
+
+  .navbar-default .navbar-nav > .active > a:focus{
+    color: none;
+    background: none;
   }
 
   .navbar > .container .navbar-brand{
@@ -262,4 +271,4 @@ body {
       font-size: 1.3em;
     }
   }
-}
+
