@@ -9,9 +9,11 @@ mongoClient.connect("mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.ml
     db = yhteys;
     console.log("Yhteys MongoBD-tietokantaan avattu!");
     
-    db.createCollection('varaukset', function(err, collection) {});
-    db.createCollection('valiaikaisetVaraukset', function(err, collection) {});
-    db.createCollection('kalenteri', function(err, collection) {});
+        db.createCollection('varaukset', function(err, collection) {});
+        db.createCollection('valiaikaisetVaraukset', function(err, collection){});
+        db.createCollection('kalenteri', function(err, collection) {});
+        db.createIndex("valiaikaisetVaraukset" ,{ "luotu": 1 }, { expireAfterSeconds: 1800 } )
+
     
 });
 

@@ -37,6 +37,11 @@ angular
         controller: 'PeruutaCtrl',
         controllerAs: 'peruuta'
       })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        controllerAs: 'admin'
+      })
       .otherwise({
         redirectTo: '/'
       });
