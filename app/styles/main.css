@@ -230,4 +230,8 @@ body {
   #etusivuKalenteri{
     margin-top:200px;
   }
+
+  .fc-time-grid .fc-bgevent{
+    background-color: black;
+  }
 }

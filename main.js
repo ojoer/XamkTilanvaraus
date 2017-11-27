@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const varaukset = require("./models/varaukset");
 const nodemailer = require("nodemailer");
 const dateFormat = require('dateformat');
+const crypto = require("crypto");
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 dateFormat.i18n  = {
     dayNames: [
@@ -38,6 +41,14 @@ app.use((req, res, next) => {
     next();
     
 });
+
+app.use(session({
+    secret : "kissakala",
+    resave : false,
+    saveUninitialized : false,
+    store: new MongoStore({ url: "mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.mlab.com:61745/varaukset" }),
+    cookie: {maxAge: 60}
+}));
 
 
 
@@ -98,6 +109,7 @@ app.post("/valiaikainenVaraus", (req, res) => {
         var loopMaara = lopetus - aloitus;
 
         data[i].hinta = tuntiHinta * loopMaara;
+        data[i].luotu = new Date();
 
         for(var j = 0; j<loopMaara;j++){
             
@@ -119,7 +131,7 @@ app.post("/valiaikainenVaraus", (req, res) => {
 
             data[i].startit.push({start:yhdistys});
         }
-
+        console.log(data[i]);
     }
 
      for(var i = 0; i < data.length;i++){
@@ -140,6 +152,8 @@ app.post("/valiaikainenVaraus", (req, res) => {
         });
  
     }
+
+
 
     var virheet = [];
     var asd = 0;
@@ -162,6 +176,8 @@ app.post("/valiaikainenVaraus", (req, res) => {
 
         
     };
+
+    res.send("Väliaikaiset varaukset tehty");
     
 
 });
@@ -191,7 +207,6 @@ app.post("/haeVarausTiedotLomakkeelle", (req, res) =>{
 
 
 app.post("/tallennaVaraus", (req, res) => {
-    console.log(req.body)
 
     if (req.body.kalenteri.length == 0) {
         res.statusCode = 500;
@@ -283,7 +298,7 @@ app.post("/tallennaVaraus", (req, res) => {
         var emailTeksti = "";
         var i;
         for (i = 0; i < req.body.kalenteri.length; i++) {
-            emailTeksti += '<p>' +  dateFormat(req.body.kalenteri[i].start, "dddd, d.m.yyyy, 'klo' HH:MM") + ' - ' + dateFormat(req.body.kalenteri[i].end, "dddd, d.m.yyyy, 'klo' h:MM") + '</p>'  
+            emailTeksti += '<p>' +  dateFormat(req.body.kalenteri[i].start, "dddd, d.m.yyyy, 'klo' HH:MM") + ' - ' + dateFormat(req.body.kalenteri[i].end, "HH:MM") + '</p>'  
         }
 
         if(lomakeData.lasku == true){
@@ -292,6 +307,8 @@ app.post("/tallennaVaraus", (req, res) => {
         else if(lomakeData.verkkomaksu == true){
             lomakeData.maksutapa = "Verkkomaksu"
         }
+
+        console.log(lomakeData);
 
         var emailPohja = '<div>' + 
         '<h3>Varauttu tila:</h3>' +
@@ -337,10 +354,9 @@ app.post("/tallennaVaraus", (req, res) => {
               pass: 'XamkTilanvarausSalis'
             }
           });
-
         var mailOptions = {
             from: 'XamkTilanvaraus@gmail.com',
-            to: 'jartsun@gmail.com',
+            to: lomakeData.email,
             subject: 'Tilausvahvistus',
             text: "Tilausvahvistuksen tiedot",
             html: emailPohja
@@ -349,14 +365,18 @@ app.post("/tallennaVaraus", (req, res) => {
           transporter.sendMail(mailOptions, function(error, info){
             if (error) {
               console.log(error.message);
+              res.send({virhe: error.message})
             } else {
               console.log('Tilausvahvistus lähetetty: ' + info.response);
+              res.end("Sähköpostin lähetys onnistui");
             }
           });
  
     }
 
 });
+
+
 
 app.post("/haeAsiakkaanAjat", (req, res) =>{
     
@@ -463,6 +483,13 @@ app.post("/poistaAsiakkaanVaraukset", (req, res) =>{
         res.send("Valitut varaukset on poistettu");
     }
     
+
+});
+
+app.post("/adminKirjaudu", (req, res) =>{
+    console.log(req.body);
+
+
 
 });
 

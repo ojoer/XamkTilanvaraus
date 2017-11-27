@@ -3,7 +3,6 @@
 $(document).ready(function() {
     var initialLocaleCode = 'fi';
 
-    
 
     $('#calendar').fullCalendar({
         
@@ -16,11 +15,11 @@ $(document).ready(function() {
                     {
                         method : "get",
                         url : "http://localhost:9000/scripts/kalenteri/juhlapaivat.json",
-                        color: 'red'
+                        color: '#000'
                     }
 
                 ],
-        defaultDate: '2017-11-17',
+        defaultDate: new Date(),
         defaultView: 'agendaWeek',
         allDaySlot: false,
         titleFormat: 'DD, MM, YYYY',
@@ -49,6 +48,7 @@ $(document).ready(function() {
         eventStartEditable:false,
         eventDurationEditable:false,
         eventOverlap:false,
+        eventColor: '#fbba18',
         selectable: true,
         selectHelper: true,
         selectOverlap:false,
@@ -57,11 +57,13 @@ $(document).ready(function() {
             var title = prompt('Event Title:');
             var eventData;
             if (title) {
+                
                 eventData = {
                     title: title,
                     start: start,
                     end: end,
-                    isNew: true
+                    isNew: true,
+                    
                 };
                 $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
             }
