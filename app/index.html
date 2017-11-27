@@ -41,13 +41,13 @@
 
         <ul class="nav navbar-nav">
           <li class="active">
-            <a href="#/">Etusivu</a>
+            <a href="#main">Etusivu</a>
           </li>
           <li>
-            <a ng-href="#/about">Tilat</a>
+            <a data-scroll ng-href="#tilat">Tilat</a>
           </li>
           <li>
-            <a ng-href="#/">Kalenteri</a>
+            <a data-scroll ng-href="#kalenteri">Kalenteri</a>
           </li>
           <li>
             <a ng-href="#/peruuta">Peruuta varaus</a>
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div ng-view=""></div>
+  <div class="content-body" ng-view=""></div>
 
   <div class="footer">
     <div class="container">
@@ -78,8 +78,6 @@
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
   </script> -->
-
-
 
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
