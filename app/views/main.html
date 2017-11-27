@@ -34,53 +34,81 @@
         <a>VINTTI</a>
       </li>
     </ul>
-    <div class="content_3">
 
-        <p>{{valittu}}</p>
+    <div class="content_3">
+      <div class="col-sm-5">
+        <img class="c3_img" ng-src="./images/{{valittu}}.jpg"> </div>
+
+      <div class="col-lg-6 tabs-textarea">
+        <div ng-show="valittu === 'Mikpolisali'">
+          <p>Mikpolisali</p>
+        </div>
+
+        <div ng-show="valittu === 'Kuitula'">
+          <p>Kuitula</p>
+        </div>
+
+        <div ng-show="valittu === 'MB123'">
+          <p>MB123</p>
+        </div>
+
+        <div ng-show="valittu === 'MA325'">
+          <p>MA325</p>
+        </div>
+
+        <div ng-show="valittu === 'Vintti'">
+          <p>Tallin Vintti</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="content_4">
 
       <div class="container" id="etusivuKalenteri">
-          <link href='./styles/kalenteri/fullcalendar.css' rel='stylesheet' />
-          <link href='./styles/kalenteri/fullcalendar.print.css' rel='stylesheet' media='print' />
-          <script src='./scripts/kalenteri/moment.min.js'></script>
-          <script src='./scripts/kalenteri/fullcalendar.js'></script>
-          <script src='./scripts/kalenteri/locale-all.js'></script>
-          <script src='./scripts/kalenteri/Main.js'></script>
-          
-          <div class="container">
+        <link href='./styles/kalenteri/fullcalendar.css' rel='stylesheet' />
+        <link href='./styles/kalenteri/fullcalendar.print.css' rel='stylesheet' media='print' />
+        <script src='./scripts/kalenteri/moment.min.js'></script>
+        <script src='./scripts/kalenteri/fullcalendar.js'></script>
+        <script src='./scripts/kalenteri/locale-all.js'></script>
+        <script src='./scripts/kalenteri/Main.js'></script>
 
-            <h2>Varauskalenteri</h2>
-              <div id='calendar'></div>
-          </div>
+        <div class="container">
 
-          <button ng-click="tyhjenna()">Tyhjennä valinnat</button>
-          
-          <button ng-click="testi()">Siirry varaamaan</button>
-          
+          <h2>Varauskalenteri</h2>
+          <div id='calendar'></div>
         </div>
-</div>
 
-<div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
+        <button ng-click="tyhjenna()">Tyhjennä valinnat</button>
+
+        <button ng-click="testi()">Siirry varaamaan</button>
+
+      </div>
+    </div>
+
+    <div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
           <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Virhe</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Sulje">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Virhe</h4>
           </div>
           <div class="modal-body">
 
-          {{ virheteksti }}
+            {{ virheteksti }}
 
 
           </div>
           <div class="modal-footer">
 
-          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
           </div>
+        </div>
       </div>
-  </div>
-  </div> 
+    </div>
 
-</div>
+  </div>
 
 
 </div>
