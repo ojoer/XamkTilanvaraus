@@ -45,30 +45,30 @@ angular.module('xamkTilanvarausApp')
 
     $scope.myFunc = function () {
 
-      $window.history.back();
+      // $window.history.back();
 
-      // var data = {
-      //   lomake: $scope.varaus,
-      //   kalenteri: $scope.yhteenveto
-      // }
+      var data = {
+        lomake: $scope.varaus,
+        kalenteri: $scope.yhteenveto
+      }
 
-      // $http({
-      //   method: "POST",
-      //   url: "http://localhost:8000/tallennaVaraus",
-      //   data: data
-      // })
-      //   .then(function (response) { // Onnistunut http-kutsu (success)
+      $http({
+        method: "POST",
+        url: "http://localhost:8000/tallennaVaraus",
+        data: data
+      })
+        .then(function (response) { // Onnistunut http-kutsu (success)
 
-      //     console.log("Kiitos varauksestasi");
-      //     localStorage.clear();
+          console.log("Kiitos varauksestasi");
+          localStorage.clear();
 
-      //   })
-      //   .catch(function (response) { // error
+        })
+        .catch(function (response) { // error
 
-      //     $scope.virheteksti = response.data.virhe;
+          $scope.virheteksti = response.data.virhe;
 
-      //     $("#virheIkkuna").modal("show");
+          $("#virheIkkuna").modal("show");
 
-      //   });
+        });
     };
   });
