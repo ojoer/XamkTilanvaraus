@@ -41,7 +41,7 @@ body {
   margin-bottom: 4px;
   position:fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 9999;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -82,7 +82,7 @@ body {
 }
 
 .content-body{
-  padding-top:6%;
+  padding-top:110px;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -250,6 +250,8 @@ body {
 
   .tabs-textarea{
     background-color: rgb(251, 251, 251);
+    min-height:390px;
+    width:57%;
   }
 
   .c3_img{
@@ -262,6 +264,11 @@ body {
     margin-top:20px;
   }
 
+  .kalenteri{
+    width:90% !important;
+    max-width: 90% !important;
+  }
+
   @media screen and (max-width: 1000px)  {
     .nav-tabs > li{
       font-size: 18px;
@@ -271,4 +278,5 @@ body {
       font-size: 1.3em;
     }
   }
+
 
