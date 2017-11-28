@@ -47,6 +47,8 @@ angular.module('xamkTilanvarausApp')
 
       // $window.history.back();
 
+      
+
       var data = {
         lomake: $scope.varaus,
         kalenteri: $scope.yhteenveto

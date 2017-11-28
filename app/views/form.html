@@ -20,27 +20,27 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="x in yhteenveto">
-                        <td>{{x.start}}</td>
-                        <td>{{x.end}}</td>
+                        <td>{{x.aloitus}}</td>
+                        <td>{{x.lopetus}}</td>
                         <td>{{x.hinta}}€</td>
                         <td>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="varaus.it" name="remember">
+                                    <input type="checkbox"  ng-model="x.it.selected" name="remember">
                                 </label>
                             </div>
                         </td>
                         <td>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="varaus.ruoka" name="remember">
+                                    <input type="checkbox" ng-model="x.ruoka.selected" name="remember">
                                 </label>
                             </div>
                         </td>
                         <td>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="varaus.vahtimestari" name="remember">
+                                    <input type="checkbox" ng-model="x.vahti.selected" name="remember">
                                 </label>
                             </div>    
                         </td>
@@ -139,9 +139,9 @@
             <div class="col-xs-12">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
+                        <input type="checkbox" ng-model="vahvistettu" ng-checked="vahvistettu" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
                 </div>
-                <button class="btn btn-default" ng-click="myFunc()">Lähetä</button>
+                <button class="btn btn-default" ng-disabled="!vahvistettu" ng-click="myFunc()">Lähetä</button>
                 <button type="cancel" class="btn btn-default">Peruuta</button>
             </div>
 

@@ -9,7 +9,7 @@
 /* eslint-disable */
 
 angular.module('xamkTilanvarausApp')
-  .controller('MainCtrl', function ($scope, $http, $window) {
+  .controller('MainCtrl', function ($scope, $http, $window, $timeout) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -118,7 +118,13 @@ angular.module('xamkTilanvarausApp')
                 .then(function (response) { // Onnistunut http-kutsu (success)
                     
                   console.log(response);
-                  $window.location.href = 'http://localhost:9000/#!/form'
+                  if(response.data){
+                    $timeout(function (){
+                      $window.location.href = 'http://localhost:9000/#!/form'
+                    }, 2000);
+                   
+                  }
+                  
                             
                 })
                 .catch(function (response) { // error

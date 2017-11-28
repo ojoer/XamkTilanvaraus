@@ -139,7 +139,6 @@ module.exports = {
 
         haeAdminVaraukset : (callback) => {
                 db.collection("varaukset").find().toArray((err,result)=>{
-                        console.log(result);
                         callback(err,result);
                 });
          },
@@ -157,7 +156,7 @@ module.exports = {
          },
 
          poistaYksittainenVaraus : (data, callback) => {
-                
+
                 db.collection("varaukset").update(
                         {},
                         { $pull: 
@@ -166,6 +165,13 @@ module.exports = {
                                 } 
                         }
                 )
+
+                db.collection("varaukset").find({
+                        'id' : data.varaustiedot.id
+                }).toArray((err,result)=>{
+                        // callback(err, result)
+                        console.log(result);
+                });
          },
 
 };

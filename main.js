@@ -10,19 +10,19 @@ const crypto = require("crypto");
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-dateFormat.i18n  = {
-    dayNames: [
-        'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su',
-        'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'
-    ],
-    monthNames: [
-        'Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'elo', 'Syys', 'Loka', 'Marras', 'Joulu',
-        'Tammikuu', 'Helmikuu', 'Maaliskuu', 'HuhtiKuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Huhtikuu'
-    ],
-    timeNames: [
-        'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
-    ]
-};
+// dateFormat.i18n  = {
+//     dayNames: [
+//         'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su',
+//         'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'
+//     ],
+//     monthNames: [
+//         'Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'elo', 'Syys', 'Loka', 'Marras', 'Joulu',
+//         'Tammikuu', 'Helmikuu', 'Maaliskuu', 'HuhtiKuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Huhtikuu'
+//     ],
+//     timeNames: [
+//         'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
+//     ]
+// };
 
 const Holidays = require('date-holidays')
 var hd = new Holidays()
@@ -114,6 +114,9 @@ app.post("/valiaikainenVaraus", (req, res) => {
         data[i].hinta = tuntiHinta * loopMaara;
         data[i].luotu = new Date();
 
+        data[i].aloitus = dateFormat(req.body[i].start, "d.m.yyyy, HH:MM");
+        data[i].lopetus = dateFormat(req.body[i].end, "d.m.yyyy, HH:MM");
+
         for(var j = 0; j<loopMaara;j++){
             
             aloitus ++;
@@ -199,8 +202,8 @@ app.post("/haeVarausTiedotLomakkeelle", (req, res) =>{
         var i;
         
         for (i = 0; i < rows.length; i++) {
-            rows[i].start = dateFormat(rows[i].start, "dddd, d.m.yyyy, HH:MM");
-            rows[i].end = dateFormat(rows[i].end, "dddd, d.m.yyyy, HH:MM");
+            // rows[i].start = dateFormat(rows[i].start, "d.m.yyyy, HH:MM");
+            // rows[i].end = dateFormat(rows[i].end, "d.m.yyyy, HH:MM");
         }
         res.send(rows);
     });
@@ -287,11 +290,8 @@ app.post("/tallennaVaraus", (req, res) => {
         lomakeData.id = req.body.kalenteri[0].id;
         lomakeData.tilaId = req.body.kalenteri[0].tilaId;
         lomakeData.varaukset = [];
-        console.log(lomakeData);
+        console.log(req.body.kalenteri);
         for (i = 0; i < req.body.kalenteri.length; i++) {
-            // Vittusaatana
-            // req.body.kalenteri[i].start = dateFormat(req.body.kalenteri[i].start, "yyyy-dd-mm'T'HH:MM:ss");
-            // req.body.kalenteri[i].end = dateFormat(req.body.kalenteri[i].end, "yyyy-dd-mm'T'HH:MM:ss");
 
             lomakeData.varaukset.push({
                 start : req.body.kalenteri[i].start,
@@ -311,8 +311,14 @@ app.post("/tallennaVaraus", (req, res) => {
 
         var emailTeksti = "";
         var i;
+
+        var now = new Date();
+        
+        
+        
         for (i = 0; i < req.body.kalenteri.length; i++) {
-            emailTeksti += '<p>' +  dateFormat(req.body.kalenteri[i].start, "dddd, d.m.yyyy, 'klo' HH:MM") + ' - ' + dateFormat(req.body.kalenteri[i].end, "HH:MM") + '</p>'  
+            console.log(dateFormat(req.body.kalenteri[i].start, "isoDate") + dateFormat(req.body.kalenteri[i].start, "isoTime"));
+            emailTeksti += '<p>' +  dateFormat(req.body.kalenteri[i].start, "d.m.yyyy, HH:MM") + ' - ' + dateFormat(req.body.kalenteri[i].end, "HH:MM") + '</p>'  
         }
 
         if(lomakeData.lasku == true){
@@ -322,7 +328,6 @@ app.post("/tallennaVaraus", (req, res) => {
             lomakeData.maksutapa = "Verkkomaksu"
         }
 
-        console.log(lomakeData);
 
         var emailPohja = '<div>' + 
         '<h3>Varauttu tila:</h3>' +
@@ -533,7 +538,16 @@ app.get("/haeAdminVaraukset", (req, res) =>{
 
 
     varaukset.haeAdminVaraukset((err,varaukset)=>{
-        console.log(varaukset);
+        
+        for (i = 0; i < varaukset.length; i++) {
+            
+            for (j = 0; j < varaukset[i].varaukset.length; j++) {
+                varaukset[i].varaukset[j].start = dateFormat(varaukset[i].varaukset[j].start, "d.m.yyyy, HH:MM");
+                varaukset[i].varaukset[j].end = dateFormat(varaukset[i].varaukset[j].end, "d.m.yyyy, HH:MM");
+            }
+            
+        }
+
         res.send(varaukset);
 
     });
@@ -555,8 +569,9 @@ app.post("/poistaYksittainenVaraus", (req, res) =>{
     console.log(req.body);
     
         varaukset.poistaYksittainenVaraus(req.body, (err,varaukset)=>{
-                    // res.send(varaukset);
-                });
+            res.send("varaukset");
+            console.log(varaukset)
+        });
     
     });
 
