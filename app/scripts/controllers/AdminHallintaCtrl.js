@@ -8,7 +8,7 @@
 /* eslint-disable */
 
 angular.module('xamkTilanvarausApp')
-  .controller('AdminHallintaCtrl', function ($scope, $http, $window) {
+  .controller('AdminHallintaCtrl', function ($scope, $http, $window, $route) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -36,16 +36,18 @@ $http({
   url: "http://localhost:8000/haeAdminVaraukset"
 })
   .then(function (response) { // Onnistunut http-kutsu (success)
-    console.log(response.data);
     $scope.varaukset = response.data;
-    $scope.asd = $scope.varaukset[0].varaukset;
-    console.log($scope.varaukset[0].varaukset); 
-    
+    console.log($scope.varaukset)
+    // for (i = 0; i < $scope.varaukset.length; i++) {
+    //   console.log($scope.varaukset[i].varaukset);
 
+    // };
+    
+    
   })
   .catch(function (response) { // error
 
-    $scope.virheteksti = response.data.virhe;
+    // $scope.virheteksti = response.data.virhe;
     $scope.otsikko = "VIRHE";
 
     $("#virheIkkuna").modal("show");
@@ -109,8 +111,10 @@ $http({
           data: data
         })
           .then(function (response) { // Onnistunut http-kutsu (success)
-  
             console.log(response.data);
+            if(response.data){
+              $window.location.reload();
+            }
             
   
           })

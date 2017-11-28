@@ -139,7 +139,7 @@
                 <label>
                     <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
             </div>
-            <button class="btn btn-default" ng-click="myFunc()">Lähetä</button>
+            <button class="btn btn-default" ng-disabled="!vahvistettu" ng-click="myFunc()">Lähetä</button>
             <button type="cancel" class="btn btn-default">Peruuta</button>
         </div>
 
