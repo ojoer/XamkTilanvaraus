@@ -16,7 +16,8 @@
     </div>
   </div>
 
-  <div id="Tilat" class="row">
+  <div id="tilat"></div>
+  <div class="row">
     <ul class="nav nav-tabs">
       <li ng-class="{'active':valittu === 'Mikpolisali'}" ng-click="valittu = 'Mikpolisali'">
         <a>MIKPOLISALI</a>
@@ -36,10 +37,9 @@
     </ul>
 
     <div class="content_3">
-      <div class="col-sm-5">
-        <img class="c3_img" ng-src="./images/{{valittu}}.jpg"> </div>
+      <img class="c3_img" ng-src="./images/{{valittu}}.jpg">
 
-      <div class="col-lg-6 tabs-textarea">
+      <div class="tabs-textarea">
         <div ng-show="valittu === 'Mikpolisali'">
           <p>Mikpolisali</p>
         </div>
