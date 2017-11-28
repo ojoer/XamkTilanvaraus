@@ -1,95 +1,93 @@
 <div ng-hide="eiTiloja" class="container">
     <h2 style="text-align:center">Varauslomake</h2>
 
-        <div class="col-xs-12">
-            <h3>Tilauksen yhteenveto</h3>
-            <h5>Varattu tila:</h5>
-            <p>{{yhteenveto[0].tilaId}}</p>
-            <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th>Varaus alkaa</th>
-                        <th>Varaus loppuu</th>
-                        <th>Varauksen hinta</th>
-                        <th>IT-tuki</th>
-                        <th>Ruoka- ja juomapalvelut</th>
-                        <th>Vahtimestaripalvelut</th>
-                        
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="x in yhteenveto">
-                        <td>{{x.start}}</td>
-                        <td>{{x.end}}</td>
-                        <td>{{x.hinta}}€</td>
-                        <td>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" ng-model="varaus.it" name="remember">
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" ng-model="varaus.ruoka" name="remember">
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" ng-model="varaus.vahtimestari" name="remember">
-                                </label>
-                            </div>    
-                        </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="col-xs-12">
+        <h3>Tilauksen yhteenveto</h3>
+        <h5 class="inline_block right_10">Varattu tila:</h5>
+        <h1 class="inline_block">{{yhteenveto[0].tilaId}}</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Varaus alkaa</th>
+                    <th>Varaus loppuu</th>
+                    <th>Varauksen hinta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in yhteenveto">
+                    <td>{{x.start}}</td>
+                    <td>{{x.end}}</td>
+                    <td>{{x.hinta}}€</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 
     <form class="form-horizontal" name="form">
-        <div class="col-xs-6">
+        <div class="col-xs-12">
             <div class="form-group">
-                <label for="etunimi">Etunimi:</label>
-                <input type="text" class="form-control" ng-model="varaus.etunimi" id="etunimi" placeholder="Etunimi" name="etunimi">
+                <div class="col-xs-6">
+
+                    <label for="etunimi">Etunimi:</label>
+                    <input type="text" class="form-control" ng-model="varaus.etunimi" id="etunimi" placeholder="Etunimi" name="etunimi">
+                </div>
+                <div class="col-xs-6">
+                    <label for="sukunimi">Sukunimi:</label>
+                    <input type="text" class="form-control" ng-model="varaus.sukunimi" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="pnumero">Puhelinnumero:</label>
-                <input type="text" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
+                <div class="col-xs-6">
+                    <label for="pnumero">Puhelinnumero:</label>
+                    <input type="text" class="form-control" ng-model="varaus.pnumero" id="pnumero" placeholder="Puhelinnumero" name="pnumero">
+                </div>
+                <div class="col-xs-6">
+                    <label for="osoite">Postiosoite:</label>
+                    <input type="text" class="form-control" ng-model="varaus.osoite" id="osoite" placeholder="Postiosoite" name="osoite">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="osoite">Postiosoite:</label>
-                <input type="text" class="form-control" ng-model="varaus.osoite" id="osoite" placeholder="Postiosoite" name="osoite">
+                <div class="col-xs-6">
+                    <label for="postiNumero">Postinumero:</label>
+                    <input type="text" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
+                </div>
+                <div class="col-xs-6">
+                    <label for="email">Sähköposti:</label>
+                    <input type="email" class="form-control" ng-model="varaus.email" id="email" placeholder="Sähköpostiosoite" name="email">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="postiNumero">Postinumero:</label>
-                <input type="text" class="form-control" ng-model="varaus.postiNumero" id="postiNumero" placeholder="Postinumero" name="postiNumero">
+                <div class="col-xs-6">
+                    <label for="postiToimipaikka">Postitoimipaikka:</label>
+                    <input type="text" class="form-control" ng-model="varaus.postiToimipaikka" id="postiToimipaikka" placeholder="Postitoimipaikka"
+                        name="postiToimipaikka">
+                </div>
             </div>
 
-        </div>
 
-        <div class="col-xs-6">
-
-            <div class="form-group">
-                <label for="sukunimi">Sukunimi:</label>
-                <input type="text" class="form-control" ng-model="varaus.sukunimi" id="sukunimi" placeholder="Sukunimi" name="sukunimi">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="varaus.it" name="remember"> IT-tuki
+                </label>
             </div>
 
-            <div class="form-group">
-                <label for="email">Sähköposti:</label>
-                <input type="email" class="form-control" ng-model="varaus.email" id="email" placeholder="Sähköpostiosoite" name="email">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="varaus.ruoka" name="remember"> Ruoka- ja juomapalvelut
+                </label>
             </div>
 
-            <div class="form-group">
-                <label for="postiToimipaikka">Postitoimipaikka:</label>
-                <input type="text" class="form-control" ng-model="varaus.postiToimipaikka" id="postiToimipaikka" placeholder="Postitoimipaikka" name="postiToimipaikka">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="varaus.vahtimestari" name="remember"> Vahtimestaripalvelut
+                </label>
             </div>
+
+
 
         </div>
         <div class="col-xs-12" id="maksutapa">
@@ -102,20 +100,20 @@
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"  ng-disabled="varaus.lasku==true" ng-model="varaus.verkkomaksu" name="remember">Verkkopankki</label>
+                    <input type="checkbox" ng-disabled="varaus.lasku==true" ng-model="varaus.verkkomaksu" name="remember">Verkkopankki</label>
             </div>
 
             <!--Maksutapa plugari tähän-->
             <div ng-show="verkkomaksu == true" class="jumbotron">
                 <h2>Verkkopankkimaksu plugari</h2>
             </div>
-            
+
 
         </div>
 
-        
 
-            <!-- <div class="col-xs-6">
+
+        <!-- <div class="col-xs-6">
                 <h3>Lisäpalvelut</h3>
                 <h6>(Lisäpalvelun hinta suluissa. Hinta lasketaan loppusummaan)</h6>
 
@@ -136,40 +134,42 @@
 
             </div> -->
 
-            <div class="col-xs-12">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
-                </div>
-                <button class="btn btn-default" ng-click="myFunc()">Lähetä</button>
-                <button type="cancel" class="btn btn-default">Peruuta</button>
+        <div class="col-xs-12">
+            <div class="checkbox bottom_10">
+                <label>
+                    <input type="checkbox" name="remember"> Vahvistan annetut tiedot oikeiksi</label>
             </div>
+            <button class="btn btn-default" ng-click="myFunc()">Lähetä</button>
+            <button type="cancel" class="btn btn-default">Peruuta</button>
+        </div>
 
 
-        
+
 
     </form>
 </div>
-    <div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+<div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Sulje">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">Virhe</h4>
-                </div>
-                <div class="modal-body">
+            </div>
+            <div class="modal-body">
 
                 {{ virheteksti }}
 
 
-                </div>
-                <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
 
                 <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
             </div>
         </div>
-        </div> 
+    </div>
+</div>
 
 
 </div>

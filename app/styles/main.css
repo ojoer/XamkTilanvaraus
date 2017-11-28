@@ -17,6 +17,18 @@ h1{
   font-family: MSBOLD,sans-serif;
 }
 
+.inline_block{
+  display: inline-block;
+}
+
+.bottom_10{
+  margin-bottom:10px !important;
+}
+
+.right_10{
+  margin-right:10px !important;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -57,6 +69,7 @@ body {
   color: #777;
   border-top: 1px solid #e5e5e5;
   text-align: center;
+  margin-top: 10px;
 }
 
 .container-narrow > hr {
@@ -272,6 +285,10 @@ body {
     max-width: 90% !important;
   }
 
+  .modal{
+    margin-top:100px;
+  }
+
   @media screen and (max-width: 1000px)  {
     .nav-tabs > li{
       font-size: 18px;
@@ -281,5 +298,6 @@ body {
       font-size: 1.3em;
     }
   }
+
 
 
