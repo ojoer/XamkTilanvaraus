@@ -17,6 +17,9 @@ h1{
   font-family: MSBOLD,sans-serif;
 }
 
+h2{
+  font-family: MSBOLD,sans-serif;
+}
 .inline_block{
   display: inline-block;
 }
@@ -298,6 +301,15 @@ body {
     width:90%;
     margin-left: 5%;
     margin-top: 1%;
+    text-align: center;
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:1px;
+    padding-bottom:1px;
+  }
+
+  .tabs-textarea h2, h1{
+    text-align: center;
   }
 
   .c3_img{
@@ -362,6 +374,10 @@ body {
     .btn-cal{
       width:49%;
       font-size: 12px;
+    }
+
+    .tabs-textarea{
+      padding: 0;
     }
 
   }
