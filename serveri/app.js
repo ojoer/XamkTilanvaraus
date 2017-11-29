@@ -381,6 +381,8 @@ app.post("/haeValiaikaistenVarausTiedot", (req, res) =>{
 
 app.post("/valiaikainenVaraus", (req, res) => {
 
+    console.log(req.body);
+
     var data =req.body;
     var tuntiHinta;
 

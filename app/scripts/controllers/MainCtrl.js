@@ -106,7 +106,7 @@ angular.module('xamkTilanvarausApp')
             }
       
             localStorage.setItem("id", genId);
-      
+      console.log(varaus);
             
             // 
                 $http({

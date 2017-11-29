@@ -5,6 +5,7 @@
         <h3>Tilauksen yhteenveto</h3>
         <h5 class="inline_block right_10">Varattu tila:</h5>
         <h1 class="inline_block">{{yhteenveto[0].tilaId}}</h1>
+        <div class="table-responsive">  
         <table class="table">
             <thead>
                 <tr>
@@ -22,21 +23,21 @@
                     <td>{{x.end}}</td>
                     <td>{{x.hinta}}€</td>
                     <td>
-                        <div class="checkbox">
+                        <div class="checkbox" style="text-align:center">
                             <label>
                                 <input type="checkbox" ng-model="x.lisaPal.it" name="remember">
                             </label>
                         </div>
                     </td>
                     <td>
-                        <div class="checkbox">
+                        <div class="checkbox" style="text-align:center">
                             <label>
                                 <input type="checkbox" ng-model="x.lisaPal.ruoka" name="remember">
                             </label>
                         </div>
                     </td>
                     <td>
-                        <div class="checkbox">
+                        <div class="checkbox" style="text-align:center">
                             <label>
                                 <input type="checkbox" ng-model="x.lisaPal.vahtimestari" name="remember">
                             </label>
@@ -45,7 +46,7 @@
                 </tr>
             </tbody>
         </table>
-
+        </div>
     </div>
 
     <form class="form-horizontal" name="form">
