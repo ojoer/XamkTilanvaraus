@@ -337,5 +337,34 @@ body {
     }
   }
 
+  @media screen and (max-width: 767px){
+    .navbar-header{
+      width: 90%;
+      position: initial;
+    }
+
+    .navbar-default{
+      padding-left:10%;
+    }
+
+    .nav > li > a{
+      padding: 15px 0px;
+    }
+
+    .nav-tabs > li{
+      font-size: 9px;
+    }
+
+    .fc button{
+      font-size: 0.9em !important; 
+    }
+
+    .btn-cal{
+      width:49%;
+      font-size: 12px;
+    }
+
+  }
+
 
 
