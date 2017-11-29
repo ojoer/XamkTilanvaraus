@@ -256,6 +256,27 @@ body {
     margin-left:25%;
   }
 
+  .carousel-indicators li{
+    width:20%;
+    height:20px;
+    border-radius: 2px;
+  }
+
+  .carousel-indicators .active{
+    width:20%;
+    height:20px;
+    border-radius: 2px;
+    background: #d3d3d3;
+  }
+
+  .carousel-indicators{
+    bottom: 0px;
+  }
+
+  .carousel-indicators ol{
+    margin-bottom: 0;
+  }
+
   .row{
     padding-bottom: 15px;
   }
