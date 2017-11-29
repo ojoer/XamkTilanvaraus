@@ -48,9 +48,8 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
         selectOverlap: false,
-        selectConstraint: "businessHours",
         select: function (start, end) {
-            var title = prompt('Event Title:');
+            var title = prompt('Varauksen otsikko:');
             var eventData;
             if (title) {
 

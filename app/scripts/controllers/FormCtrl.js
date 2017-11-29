@@ -47,7 +47,7 @@ angular.module('xamkTilanvarausApp')
 
       // $window.history.back();
 
-      
+      console.log($scope.yhteenveto);
 
       var data = {
         lomake: $scope.varaus,

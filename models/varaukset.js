@@ -148,10 +148,8 @@ module.exports = {
                         'id' : data.id
                 });
                 
-                db.collection("varaukset").remove({
+                db.collection("kalenteri").remove({
                         'id' : data.id
-                }).toArray((err,result)=>{
-                        console.log(result);
                 });
          },
 
@@ -187,10 +185,9 @@ module.exports = {
                 console.log(data);
                 db.collection("varaukset").updateMany(
                 {'id' :   data.varaustiedot[0].id},
-                { $set: data.varaustiedot[0] }).then((err,result)=>{
-                        callback(err,result);
-                });
+                { $set: data.varaustiedot[0] })
 
+                
            
          },
 
@@ -198,9 +195,15 @@ module.exports = {
                 
         console.log(data);
 
-        db.collection("kalenteri").updateMany(
-        {'id' :   data.id},
-        { $set: data })
+        db.collection("varaukset").updateMany(
+                {'id' :   data.id},
+                { $set: { varaukset: 
+                        { $in: [data] }
+                }  })
+
+        // db.collection("kalenteri").updateMany(
+        // {'id' :   data.id},
+        // { $set: data })
 
         
         },

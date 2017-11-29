@@ -66,8 +66,10 @@ $http({
           data: this.varaus
         })
           .then(function (response) { // Onnistunut http-kutsu (success)
-  
-            console.log(response.data);
+            
+            if(response.data){
+              $route.reload();
+            }
             
   
           })
@@ -150,6 +152,10 @@ $http({
         console.log("No ei sitten")
       }
     };
+
+    $scope.lukitsePaiva = function () {
+      $window.location.href = 'http://localhost:9000/#!/adminLukitse'
+    }
 
     // $scope.lahetaPeruutus = function () {
 

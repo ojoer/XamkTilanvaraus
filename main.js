@@ -605,11 +605,19 @@ app.post("/poistaKokoVaraus", (req, res) =>{
 
 console.log(req.body);
 
-    varaukset.poistaKokoVaraus(req.body, (err,varaukset)=>{
-                // res.send(varaukset);
-            });
-
+    varaukset.poistaKokoVaraus(req.body);
+            res.end("Koko varaus poistettu");
 });
+
+app.post("/adminLukitse", (req, res) =>{
+    
+    console.log(req.body);
+    
+    varaukset.tallennaAjat(req.body);
+
+    res.end("Varaus tehty");
+    
+    });
 
 app.post("/poistaYksittainenVaraus", (req, res) =>{
     
