@@ -103,46 +103,21 @@
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-disabled="varaus.lasku==true" ng-model="varaus.verkkomaksu" name="remember">Verkkopankki</label>
+                    <input type="checkbox" ng-disabled="varaus.lasku==true"  ng-model="varaus.verkkomaksu" name="remember">Verkkopankki</label>
             </div>
 
             <!--Maksutapa plugari tähän-->
-            <div ng-show="verkkomaksu == true" class="jumbotron">
-                <h2>Verkkopankkimaksu plugari</h2>
-            </div>
+
 
 
         </div>
 
-
-
-        <!-- <div class="col-xs-6">
-                <h3>Lisäpalvelut</h3>
-                <h6>(Lisäpalvelun hinta suluissa. Hinta lasketaan loppusummaan)</h6>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="varaus.ruoka" name="remember"> Ruoka- ja juomapalvelut</label>
-                </div>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="varaus.vahti" name="remember"> Vahtimestaripalvelut</label>
-                </div>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="varaus.it" name="remember"> IT-tuki</label>
-                </div>
-
-            </div> -->
-
         <div class="col-xs-12">
             <div class="checkbox bottom_10">
                 <label>
-                    <input type="checkbox"  name="remember" ng-checked="vahvistettu = true"> Vahvistan annetut tiedot oikeiksi</label>
+                    <input type="checkbox" ng-model="varaus.vahvistettu" name="remember" > Vahvistan annetut tiedot oikeiksi</label>
             </div>
-            <button class="btn btn-default" ng-disabled="!vahvistettu" ng-click="myFunc()">Lähetä</button>
+            <button class="btn btn-default"  ng-click="myFunc()">Lähetä</button>
             <button type="cancel" class="btn btn-default">Peruuta</button>
         </div>
 
@@ -151,6 +126,13 @@
 
     </form>
 </div>
+<div class="container">
+    <div ng-show="verkkomaksu" class="jumbotron">
+        <h2>Valitse verkkopankki</h2>
+        <p ng-bind-html="renderHtml(verkkomaksuPlugin)"></p>
+    </div>
+</div>
+
 <div class="modal" id="virheIkkuna" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

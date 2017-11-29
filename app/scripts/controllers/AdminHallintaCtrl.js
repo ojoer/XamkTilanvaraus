@@ -33,7 +33,7 @@ angular.module('xamkTilanvarausApp')
 
 $http({
   method: "get",
-  url: "http://localhost:8000/haeAdminVaraukset"
+  url: "https://localhost:8000/haeAdminVaraukset"
 })
   .then(function (response) { // Onnistunut http-kutsu (success)
     $scope.varaukset = response.data;
@@ -62,7 +62,7 @@ $http({
         
         $http({
           method: "POST",
-          url: "http://localhost:8000/poistaKokoVaraus",
+          url: "https://localhost:8000/poistaKokoVaraus",
           data: this.varaus
         })
           .then(function (response) { // Onnistunut http-kutsu (success)
@@ -104,7 +104,7 @@ $http({
 
         localStorage.setItem("muokkaaId", this.varaus.id);
 
-        $window.location.href = 'http://localhost:9000/#!/adminMuokkaa'
+        $window.location.href = 'https://localhost:9000/#!/adminMuokkaa'
         
 
       }
@@ -127,7 +127,7 @@ $http({
         
         $http({
           method: "POST",
-          url: "http://localhost:8000/poistaYksittainenVaraus",
+          url: "https://localhost:8000/poistaYksittainenVaraus",
           data: data
         })
           .then(function (response) { // Onnistunut http-kutsu (success)
@@ -154,7 +154,7 @@ $http({
     };
 
     $scope.lukitsePaiva = function () {
-      $window.location.href = 'http://localhost:9000/#!/adminLukitse'
+      $window.location.href = 'https://localhost:9000/#!/adminLukitse'
     }
 
     // $scope.lahetaPeruutus = function () {
@@ -181,7 +181,7 @@ $http({
 
     //   $http({
     //     method: "POST",
-    //     url: "http://localhost:8000/poistaAsiakkaanVaraukset",
+    //     url: "https://localhost:8000/poistaAsiakkaanVaraukset",
     //     data: data
     //   })
     //     .then(function (response) { // Onnistunut http-kutsu (success)

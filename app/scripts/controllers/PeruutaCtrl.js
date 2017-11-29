@@ -38,7 +38,7 @@ $scope.vahvista = function (){
 
       $http({
         method: "POST",
-        url: "http://localhost:8000/haeAsiakkaanAjat",
+        url: "https://localhost:8000/haeAsiakkaanAjat",
         data: data
       })
         .then(function (response) { // Onnistunut http-kutsu (success)
@@ -83,7 +83,7 @@ $scope.vahvista = function (){
 
       $http({
         method: "POST",
-        url: "http://localhost:8000/poistaAsiakkaanVaraukset",
+        url: "https://localhost:8000/poistaAsiakkaanVaraukset",
         data: data
       })
         .then(function (response) { // Onnistunut http-kutsu (success)

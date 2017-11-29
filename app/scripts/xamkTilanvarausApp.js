@@ -22,9 +22,9 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
+      .when('/kiitos', {
+        templateUrl: 'views/kiitos.html',
+        controller: 'KiitosCtrl',
         controllerAs: 'about'
       })
       .when('/form', {

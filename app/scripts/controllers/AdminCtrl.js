@@ -40,13 +40,13 @@ $scope.vahvista = function (){
 
       $http({
         method: "POST",
-        url: "http://localhost:8000/adminKirjaudu",
+        url: "https://localhost:8000/adminKirjaudu",
         data: data
       })
         .then(function (response) { // Onnistunut http-kutsu (success)
 
           if(response.data){
-            // $window.location.href = 'http://localhost:9000/#!/adminEtusivu'
+            // $window.location.href = 'https://localhost:9000/#!/adminEtusivu'
           }
           // $scope.piilotaTiedot = false;
           // $scope.varaukset = response.data;
@@ -87,7 +87,7 @@ $scope.vahvista = function (){
 
     //   $http({
     //     method: "POST",
-    //     url: "http://localhost:8000/poistaAsiakkaanVaraukset",
+    //     url: "https://localhost:8000/poistaAsiakkaanVaraukset",
     //     data: data
     //   })
     //     .then(function (response) { // Onnistunut http-kutsu (success)
