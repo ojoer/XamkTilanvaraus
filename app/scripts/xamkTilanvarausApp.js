@@ -22,9 +22,9 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
+      .when('/kiitos', {
+        templateUrl: 'views/kiitos.html',
+        controller: 'KiitosCtrl',
         controllerAs: 'about'
       })
       .when('/form', {
@@ -51,6 +51,11 @@ angular
         templateUrl: 'views/adminMuokkaa.html',
         controller: 'AdminMuokkaaCtrl',
         controllerAs: 'adminMuokkaa'
+      })
+      .when('/adminLukitse', {
+        templateUrl: 'views/adminLukitse.html',
+        controller: 'adminLukitseCtrl',
+        controllerAs: 'adminLukitse'
       })
       .otherwise({
         redirectTo: '/'

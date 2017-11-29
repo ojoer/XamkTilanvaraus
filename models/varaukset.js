@@ -9,10 +9,14 @@ mongoClient.connect("mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.ml
     db = yhteys;
     console.log("Yhteys MongoBD-tietokantaan avattu!");
     
-        db.createCollection('varaukset', function(err, collection) {});
         db.createCollection('valiaikaisetVaraukset', function(err, collection){});
         db.createCollection('kalenteri', function(err, collection) {});
-        db.createIndex("valiaikaisetVaraukset" ,{ "luotu": 1 }, { expireAfterSeconds: 1800 } )
+        db.createCollection('varaukset', function(err, collection) {});
+        db.createCollection('maksussaOlevatVaraukset', function(err, collection) {});
+        db.createCollection('maksussaOlevatKalenteri', function(err, collection) {});
+        db.createIndex("valiaikaisetVaraukset" ,{ "luotu": 1 }, { expireAfterSeconds: 1800 } );
+        db.createIndex("maksussaOlevatKalenteri" ,{ "luotu": 1 }, { expireAfterSeconds: 1800 } );
+        db.createIndex("maksussaOlevatVaraukset" ,{ "luotu": 1 }, { expireAfterSeconds: 1800 } );
 
     
 });
@@ -81,6 +85,40 @@ module.exports = {
                 });
         },
 
+        testi : (data, err) => {
+                console.log(data);
+                if(err){
+                        throw err
+                }
+                db.collection("maksussaOlevatVaraukset").insert(data);
+        },
+
+
+        maksussaOlevaLomake : (data) => {
+                if(err){
+                        throw err
+                }
+                db.collection("maksussaOlevatVaraukset").insert(data);
+        },
+
+       maksussaOlevaAika : (data, err) => {
+               db.collection("maksussaOlevatKalenteri").insert(data);
+        },
+
+        haeMaksussaOlevaLomake : (data, err) => {
+                if(err){
+                        throw err
+                }
+                db.collection("maksussaOlevatVaraukset").find({'id' : data});
+        },
+
+        HaeMaksussaOlevaAika : (data, err) => {
+               db.collection("maksussaOlevatKalenteri").find({'id' : data});
+        },
+
+
+
+
         tallennaTietokantaan : (data, err) => {
                 if(err){
                         throw err
@@ -148,10 +186,8 @@ module.exports = {
                         'id' : data.id
                 });
                 
-                db.collection("varaukset").remove({
+                db.collection("kalenteri").remove({
                         'id' : data.id
-                }).toArray((err,result)=>{
-                        console.log(result);
                 });
          },
 
@@ -187,20 +223,23 @@ module.exports = {
                 console.log(data);
                 db.collection("varaukset").updateMany(
                 {'id' :   data.varaustiedot[0].id},
-                { $set: data.varaustiedot[0] }).then((err,result)=>{
-                        callback(err,result);
-                });
+                { $set: data.varaustiedot[0] })
 
+                
            
          },
 
         adminMuokkaaKalenteria : (data, callback) => {
-                
-        console.log(data);
 
-        db.collection("kalenteri").updateMany(
-        {'id' :   data.id},
-        { $set: data })
+        db.collection("varaukset").updateMany(
+                {'id' :   data.id},
+                { $set: { varaukset: 
+                        { $in: [data] }
+                }  })
+
+        // db.collection("kalenteri").updateMany(
+        // {'id' :   data.id},
+        // { $set: data })
 
         
         },

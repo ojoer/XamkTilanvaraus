@@ -51,7 +51,7 @@ Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 
 5. **!HUOM!** Seuraava komento on tarkoitettu ainoastaan julkaisua varten `grunt` 
 
-Tämän hetkinen toteutus toimii paikallisesti, mutta tietokannat löytyvät mLabin palvelimilta, joten varaukset löytyvät koneella kuin koneella. **!HUOM!** Nodejs palvelin pitää olla päällä (löytyy projektin juuresta komennolla `node main.js`).
+Tämän hetkinen toteutus toimii paikallisesti, mutta tietokannat löytyvät mLabin palvelimilta, joten varaukset löytyvät koneella kuin koneella. **!HUOM!** Nodejs palvelin pitää olla päällä (löytyy projektin SERVERI-kansiosta komennolla `node main.js`).
 
 Sähköpostin lähettäminen paikalliselta palvelimelta vaatii koneen palomuurin sulkemista.
 

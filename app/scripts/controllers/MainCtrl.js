@@ -31,7 +31,7 @@ angular.module('xamkTilanvarausApp')
 
       $http({
         method : "post",
-        url : "http://localhost:8000/haeVarausTiedot",
+        url : "https://localhost:8000/haeVarausTiedot",
         data: data
       })
           .then(function (response) { // Onnistunut http-kutsu (success)
@@ -53,7 +53,7 @@ angular.module('xamkTilanvarausApp')
 
           $http({
             method : "post",
-            url : "http://localhost:8000/haeValiaikaistenVarausTiedot",
+            url : "https://localhost:8000/haeValiaikaistenVarausTiedot",
             data: data
           })
               .then(function (response) { // Onnistunut http-kutsu (success)
@@ -111,7 +111,7 @@ angular.module('xamkTilanvarausApp')
             // 
                 $http({
                   method : "POST",
-                  url : "http://localhost:8000/valiaikainenVaraus",
+                  url : "https://localhost:8000/valiaikainenVaraus",
                   data : varaus
                   
                 })

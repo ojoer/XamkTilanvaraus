@@ -27,7 +27,7 @@ var data = {
 
 $http({
   method: "post",
-  url: "http://localhost:8000/haeAdminVarauksetMuokkaukseen",
+  url: "https://localhost:8000/haeAdminVarauksetMuokkaukseen",
   data: data
 })
   .then(function (response) { // Onnistunut http-kutsu (success)
@@ -70,7 +70,7 @@ $http({
 
     $http({
       method: "post",
-      url: "http://localhost:8000/adminMuokkaaVarausta",
+      url: "https://localhost:8000/adminMuokkaaVarausta",
       data: varausData
     })
       .then(function (response) { // Onnistunut http-kutsu (success)
