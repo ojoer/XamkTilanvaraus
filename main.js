@@ -3,12 +3,14 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
 const varaukset = require("./models/varaukset");
 const nodemailer = require("nodemailer");
 const dateFormat = require('dateformat');
 const crypto = require("crypto");
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+
 
 // dateFormat.i18n  = {
 //     dayNames: [
@@ -31,16 +33,11 @@ app.set("views", "./views");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static("./public"));
 
-app.use(session({
-    secret : "kissakala",
-    resave : false,
-    saveUninitialized : false,
-    store: new MongoStore({ url: "mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.mlab.com:61745/varaukset" }),
-    cookie: {maxAge: 60},
-    ttl: 60
-}));
+
+
 
 app.use((req, res, next) => {
     
@@ -51,7 +48,21 @@ app.use((req, res, next) => {
     
 });
 
+app.use(cookieParser())
+app.use(session({
+    secret : "kissakala",
+    resave : false,
+    saveUninitialized : false,
+    store: new MongoStore({ url: "mongodb://XamkTilanvaraus:XamkTilanvarausSalis1@ds261745.mlab.com:61745/varaukset" }),
+    cookie: {maxAge: 3600000},
+    cookie: { secure: false },
+    ttl: 14 * 24 * 60 * 60
+}));
 
+// app.all('*', function (req, res, next) {
+//     console.log(req);
+//     next(); // pass control to the next handler
+//   });
 
 
 
@@ -289,11 +300,14 @@ app.post("/tallennaVaraus", (req, res) => {
         var lomakeData = req.body.lomake;
         lomakeData.id = req.body.kalenteri[0].id;
         lomakeData.tilaId = req.body.kalenteri[0].tilaId;
+        
         lomakeData.varaukset = [];
         console.log(req.body.kalenteri);
         for (i = 0; i < req.body.kalenteri.length; i++) {
 
             lomakeData.varaukset.push({
+                aloitus : dateFormat(req.body.kalenteri[i].start, "d.m.yyyy, HH:MM"),
+                lopetus : dateFormat(req.body.kalenteri[i].end, "d.m.yyyy, HH:MM"),
                 start : req.body.kalenteri[i].start,
                 end : req.body.kalenteri[i].end,
                 hinta : req.body.kalenteri[i].hinta
@@ -505,7 +519,24 @@ app.post("/poistaAsiakkaanVaraukset", (req, res) =>{
 
 });
 
+
+
+var auth = function(req, res, next) {
+
+    console.log(req.session)
+    if (req.session.tunnus == "XamkTilanvaraus"){
+        console.log("Kirjautuminen vahvistettu")
+        return next();
+    }
+      
+    else
+      return res.sendStatus(401);
+  };
+
 app.post("/adminKirjaudu", (req, res) =>{
+
+   
+    
 
     let kirjautumisTiedot = req.body;
     
@@ -526,27 +557,43 @@ app.post("/adminKirjaudu", (req, res) =>{
         }
 
         else if(tiedot.length == 1){
-            req.session.tunnus = tiedot[0].tunnus;
-            res.send('asd');
+            console.log(req.session);
+            req.session.tunnus = req.body.tunnus;
+            console.log(req.session);
+              res.send('asd');
             
         }
     });
 
+    req.session.tunnus = req.body.tunnus;
+    console.log(req.session);
+   
+
 });
+
+
+
+// Access the session as req.session
+// app.get('/haeAdminVaraukset', function(req, res, next) {
+//     console.log(req.session)
+//   if (req.session.views) {
+//     req.session.views++
+//     res.setHeader('Content-Type', 'text/html')
+//     res.write('<p>views: ' + req.session.views + '</p>')
+//     res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+//     res.end()
+//   } else {
+//     req.session.views = 1
+//     res.end('welcome to the session demo. refresh!')
+//   }
+// })
+
+
 
 app.get("/haeAdminVaraukset", (req, res) =>{
 
-
+    console.log(req.body)
     varaukset.haeAdminVaraukset((err,varaukset)=>{
-        
-        for (i = 0; i < varaukset.length; i++) {
-            
-            for (j = 0; j < varaukset[i].varaukset.length; j++) {
-                varaukset[i].varaukset[j].start = dateFormat(varaukset[i].varaukset[j].start, "d.m.yyyy, HH:MM");
-                varaukset[i].varaukset[j].end = dateFormat(varaukset[i].varaukset[j].end, "d.m.yyyy, HH:MM");
-            }
-            
-        }
 
         res.send(varaukset);
 
@@ -566,11 +613,38 @@ console.log(req.body);
 
 app.post("/poistaYksittainenVaraus", (req, res) =>{
     
-    console.log(req.body);
     
         varaukset.poistaYksittainenVaraus(req.body, (err,varaukset)=>{
-            res.send("varaukset");
-            console.log(varaukset)
+            res.send(varaukset);
+        });
+    
+    });
+
+
+app.post("/haeAdminVarauksetMuokkaukseen", (req, res) =>{
+
+    console.log(req.body);
+
+    varaukset.haeAdminVarauksetMuokkaukseen(req.body, (err,varaukset)=>{
+                res.send(varaukset);
+            });
+
+});
+
+app.post("/adminMuokkaaVarausta", (req, res) =>{
+    
+        varaukset.adminMuokkaaVarausta(req.body, (err,asd)=>{
+            if(!asd){
+
+                for (i = 0; i < req.body.aikatiedot.length; i++) {
+                    req.body.aikatiedot[i].id = req.body.varaustiedot[0].id
+                    varaukset.adminMuokkaaKalenteria(req.body.aikatiedot[i], (err,varaukset)=>{
+                        console.log("asd");
+                    });
+                };
+
+                
+            }
         });
     
     });
@@ -580,3 +654,5 @@ app.listen(8000, () => {
     console.log("Varauspalvelin käynnistyi porttiin 8000");
     
 });
+
+

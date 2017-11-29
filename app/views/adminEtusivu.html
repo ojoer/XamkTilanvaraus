@@ -12,7 +12,7 @@
                 </a>
             </h4>
             <button class="btn btn-warning" ng-click="muokkaaVarausta($index)">Muokkaa</button>
-            <button class="btn btn-danger" ng-click="poistaKokoVaraus($index)">poista</button>
+            <button class="btn btn-danger" ng-click="poistaKokoVaraus($index)">Poista</button>
             </div>
             <div id="{{varaus._id}}" class="panel-collapse collapse in">
             <div class="panel-body">
@@ -37,12 +37,11 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="aika in varaukset[$index].varaukset">
-                            <td>{{aika.start}}</td>
-                            <td>{{aika.end}}</td>
+                            <td>{{aika.aloitus}}</td>
+                            <td>{{aika.lopetus}}</td>
                             <td>{{aika.hinta}}€</td>
                             <td>
                                 <button class="btn btn-danger" ng-click="poistaYksittainenVaraus($index)">Poista</button>
-                                <button class="btn btn-warning" ng-click="muokkaaVarausta($index)">Muokkaa</button>
                             </td>
                             </tr>
                         </tbody>

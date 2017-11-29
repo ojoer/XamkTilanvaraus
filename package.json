@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "connect-mongo": "^2.0.0",
+    "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "date-holidays": "^1.2.0",
     "dateformat": "^3.0.2",

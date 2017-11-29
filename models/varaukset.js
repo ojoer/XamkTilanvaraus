@@ -157,6 +157,7 @@ module.exports = {
 
          poistaYksittainenVaraus : (data, callback) => {
 
+                console.log(data);
                 db.collection("varaukset").update(
                         {},
                         { $pull: 
@@ -166,12 +167,42 @@ module.exports = {
                         }
                 )
 
+
                 db.collection("varaukset").find({
                         'id' : data.varaustiedot.id
                 }).toArray((err,result)=>{
-                        // callback(err, result)
-                        console.log(result);
+                        callback(err, result)
                 });
          },
+
+         haeAdminVarauksetMuokkaukseen : (data, callback) => {
+                db.collection("varaukset").find({'id' : data.id}).toArray((err,result)=>{
+                        callback(err,result);
+                });
+         },
+
+         adminMuokkaaVarausta : (data, callback) => {
+
+                delete data.varaustiedot[0]._id;
+                console.log(data);
+                db.collection("varaukset").updateMany(
+                {'id' :   data.varaustiedot[0].id},
+                { $set: data.varaustiedot[0] }).then((err,result)=>{
+                        callback(err,result);
+                });
+
+           
+         },
+
+        adminMuokkaaKalenteria : (data, callback) => {
+                
+        console.log(data);
+
+        db.collection("kalenteri").updateMany(
+        {'id' :   data.id},
+        { $set: data })
+
+        
+        },
 
 };

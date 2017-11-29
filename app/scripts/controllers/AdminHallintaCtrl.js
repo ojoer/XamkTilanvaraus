@@ -92,6 +92,24 @@ $http({
     $scope.muokkaaVarausta = function () {
       console.log(this.varaus)
       console.log(this.aika);
+
+      if(window.confirm("Muokkaa varausta?")){
+        
+        var data = {
+          varaustiedot : this.varaus,
+          aikatiedot : this.aika
+        }
+
+        localStorage.setItem("muokkaaId", this.varaus.id);
+
+        $window.location.href = 'http://localhost:9000/#!/adminMuokkaa'
+        
+
+      }
+
+      else{
+        console.log("No ei sitten")
+      }
     };
 
     $scope.poistaYksittainenVaraus = function () {
@@ -113,7 +131,7 @@ $http({
           .then(function (response) { // Onnistunut http-kutsu (success)
             console.log(response.data);
             if(response.data){
-              $window.location.reload();
+              $route.reload();
             }
             
   
