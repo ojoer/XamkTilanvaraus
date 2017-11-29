@@ -380,6 +380,11 @@ body {
       padding: 0;
     }
 
+    .carousel-inner > .item > img{
+      width:90%;
+      margin-left:5%;
+    }
+
   }
 
 
