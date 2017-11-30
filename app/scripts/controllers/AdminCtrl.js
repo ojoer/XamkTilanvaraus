@@ -46,7 +46,7 @@ $scope.vahvista = function (){
         .then(function (response) { // Onnistunut http-kutsu (success)
 
           if(response.data){
-            // $window.location.href = 'https://localhost:9000/#!/adminEtusivu'
+            $window.location.href = 'http://localhost:9000/#!/adminEtusivu'
           }
           // $scope.piilotaTiedot = false;
           // $scope.varaukset = response.data;

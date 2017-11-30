@@ -54,8 +54,12 @@ $(document).ready(function () {
         selectHelper: true,
         selectOverlap: false,
         selectConstraint: "businessHours",
+        eventConstraint:{
+            start: '2018-07-02T10:00:00',
+            end: '2018-07-02T22:00:00'
+        },
         select: function (start, end) {
-            var title = prompt('Event Title:');
+            var title = prompt('Varauksen tarkoitus:');
             var eventData;
             if (title) {
 

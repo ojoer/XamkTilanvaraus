@@ -31,7 +31,7 @@ var options = {
 var payments = require(__dirname + '/../payment').create(options);
 
 payments.on('success', function (req, res, data) {
-res.redirect('http://localhost:9000/#!/kiitos');
+    res.redirect('http://localhost:9000/#!/kiitos');
 });
 
 payments.on('mac-check-failed', function (req, res, data) {
@@ -39,7 +39,7 @@ payments.on('mac-check-failed', function (req, res, data) {
 });
 
 payments.on('cancel', function (req, res) {
-  res.status(200).send("<html><h1 id='cancel'>CANCEL</h1></html>");
+    res.redirect('http://localhost:9000/#!/hylattyMaksu');
 });
 
 payments.on('reject', function (req, res) {
@@ -207,8 +207,10 @@ app.post('/verkkomaksu', function (req, res) {
                 }
 
         
-                varaukset.maksussaOlevaLomake(lomakeData);
-                varaukset.maksussaOlevaAika(req.body.kalenteri);
+                // varaukset.maksussaOlevaLomake(lomakeData);
+                // varaukset.maksussaOlevaAika(req.body.kalenteri);
+                varaukset.tallennaTietokantaan(lomakeData);
+                varaukset.tallennaAjat(req.body.kalenteri);
                 varaukset.poistaValiaikaiset(req.body.kalenteri[0].id);
 
 
@@ -336,7 +338,8 @@ app.post('/verkkomaksu', function (req, res) {
               res.send({virhe: error.message})
             } else {
               console.log('Tilausvahvistus lähetetty: ' + info.response);
-              res.end("Sähköpostin lähetys onnistui");
+              res.send("Sähköpostin lähetys onnistui");
+              res.redirect('http://localhost:9000/#!/kiitos');
             }
           });
 
@@ -349,15 +352,17 @@ app.post('/verkkomaksu', function (req, res) {
 });
 
 app.post("/vahvistaMaksettuVaraus", (req, res) =>{
-    varaukset.haeMaksussaOlevaLomake(req.body.id,(err,varaukset)=>{
-        varaukset.tallennaTietokantaan(varaukset);
+    // varaukset.haeMaksussaOlevaLomake(req.body.id,(err,varaukset)=>{
+    //     varaukset.tallennaTietokantaan(varaukset);
         
-        varaukset.HaeMaksussaOlevaAika(req.body.id,(err,asd)=>{
-            varaukset.tallennaAjat(asd);
+    //     varaukset.HaeMaksussaOlevaAika(req.body.id,(err,asd)=>{
+    //         varaukset.tallennaAjat(asd);
 
-            res.send("asd");
-        });
-    });
+            
+    //     });
+    // });
+
+    res.send("asd");
 });
 
 
@@ -397,7 +402,7 @@ app.post("/valiaikainenVaraus", (req, res) => {
         tuntiHinta = 200.00;
     }
 
-    if(data[0].tilaId == "MB123"){
+    if(data[0].tilaId == "MB124"){
         tuntiHinta = 60.00;
     }
 
@@ -672,9 +677,8 @@ app.post("/adminKirjaudu", (req, res) =>{
         }
 
         else if(tiedot.length == 1){
-            console.log(req.session);
             req.session.tunnus = req.body.tunnus;
-            console.log(req.session);
+
               res.send('asd');
             
         }
