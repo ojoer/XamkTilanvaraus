@@ -15,6 +15,9 @@ angular.module('xamkTilanvarausApp')
       'Karma'
     ];
 
+    var console = {};
+    console.log = function(){};
+
     $scope.valittu = "Mikpolisali";
     
         $scope.$watch("valittu", function() {

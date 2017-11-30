@@ -9,13 +9,17 @@
 /* eslint-disable */
 
 angular.module('xamkTilanvarausApp')
-  .controller('MainCtrl', function ($scope, $http, $window, $timeout) {
+  .controller('MainCtrl', function ($scope, $http, $window, $timeout, $route) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    
+    var console = {};
+    console.log = function(){};
 
+    $('#calendar').fullCalendar( 'refetchEvents' )
     $scope.valittu = "Mikpolisali";
 
     $scope.$watch("valittu", function() {
@@ -35,6 +39,7 @@ angular.module('xamkTilanvarausApp')
         data: data
       })
           .then(function (response) { // Onnistunut http-kutsu (success)
+            
             console.log(response.data);
             $('#calendar').fullCalendar( 'removeEvents');
             $('#calendar').fullCalendar( 'addEventSource', response.data);

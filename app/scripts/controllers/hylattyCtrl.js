@@ -8,7 +8,7 @@
 /* eslint-disable */
 
 angular.module('xamkTilanvarausApp')
-  .controller('KiitosCtrl', function ($scope, $http, $window, $timeout) {
+  .controller('hylattyCtrl', function ($scope, $http, $window, $timeout) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

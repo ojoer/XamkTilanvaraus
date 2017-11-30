@@ -25,7 +25,12 @@ angular
       .when('/kiitos', {
         templateUrl: 'views/kiitos.html',
         controller: 'KiitosCtrl',
-        controllerAs: 'about'
+        controllerAs: 'kiitos'
+      })
+      .when('/hylattyMaksu', {
+        templateUrl: 'views/hylattyMaksu.html',
+        controller: 'hylattyCtrl',
+        controllerAs: 'hylatty'
       })
       .when('/form', {
         templateUrl: 'views/form.html',
