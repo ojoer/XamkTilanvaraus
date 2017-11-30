@@ -339,6 +339,10 @@ body {
     width:100px;
   }
 
+  .mobile_help{
+    display:none;
+  }
+
   @media screen and (max-width: 1000px)  {
     .nav-tabs > li{
       font-size: 18px;
@@ -383,6 +387,16 @@ body {
     .carousel-inner > .item > img{
       width:90%;
       margin-left:5%;
+    }
+
+    .mobile_help{
+      display: block;
+      text-align: center;
+      font-size:15px;
+    }
+
+    .kalenteri h2{
+      text-align: center;
     }
 
   }
