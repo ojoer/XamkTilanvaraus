@@ -16,6 +16,8 @@ angular.module('xamkTilanvarausApp')
       'Karma'
     ];
     
+    var console = {};
+    console.log = function(){};
 
     $('#calendar').fullCalendar( 'refetchEvents' )
     $scope.valittu = "Mikpolisali";

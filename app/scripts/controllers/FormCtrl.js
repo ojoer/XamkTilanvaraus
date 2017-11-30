@@ -15,6 +15,9 @@ angular.module('xamkTilanvarausApp')
       'Karma'
     ];
 
+    var console = {};
+    console.log = function(){};
+
     $scope.verkkomaksu = false;
 
     $scope.renderHtml = function(html_code)

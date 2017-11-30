@@ -16,20 +16,8 @@ angular.module('xamkTilanvarausApp')
     ];
 
     
-// $scope.piilotaTiedot = true;
-// $scope.vahvistusPuuttuu = true;
-
-// $scope.vahvista = function (){
-//   if($scope.vahvistusPuuttuu == false){
-//     $scope.vahvistusPuuttuu = true;
-//   }
-//   else if($scope.vahvistusPuuttuu == true){
-//     $scope.vahvistusPuuttuu = false;
-//   }
-// };
-
-// var console = {};
-// console.log = function(){};
+    var console = {};
+    console.log = function(){};
 
 $http({
   method: "get",

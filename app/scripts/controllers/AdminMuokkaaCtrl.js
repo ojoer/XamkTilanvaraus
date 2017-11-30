@@ -16,8 +16,8 @@ angular.module('xamkTilanvarausApp')
     ];
 
 
-// var console = {};
-// console.log = function(){}
+    var console = {};
+    console.log = function(){};
 
 
 

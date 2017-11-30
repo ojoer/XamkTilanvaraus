@@ -28,8 +28,8 @@ $scope.vahvista = function (){
   }
 };
 
-// var console = {};
-// console.log = function(){};
+var console = {};
+console.log = function(){};
 
     $scope.kirjaudu = function () {
 

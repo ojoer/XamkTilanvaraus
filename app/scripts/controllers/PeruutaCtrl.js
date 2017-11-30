@@ -15,6 +15,8 @@ angular.module('xamkTilanvarausApp')
       'Karma'
     ];
 
+    var console = {};
+    console.log = function(){};
     
 $scope.piilotaTiedot = true;
 $scope.vahvistusPuuttuu = true;

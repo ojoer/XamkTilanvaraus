@@ -15,6 +15,9 @@ angular.module('xamkTilanvarausApp')
       'Karma'
     ];
 
+    var console = {};
+    console.log = function(){};
+
     var data = {
       id :localStorage.getItem('id')
     }
