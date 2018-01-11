@@ -3,6 +3,20 @@ Gitti tälle projektille
 
 Projekti on toteutettu kouluprojektia varten kurssille Sähköisen palvelun suunnittelu ja toteutus.
 
+**!Huom!**
+
+1. Koulun palomuuri blokkaa tietokantojen käytön pilvestä sekä sähköpostin lähetyksen. Jos softaa ajaa koulun verkossa, täytyy asentaa paikallinen mongodb tietokantapalvelin, projektin juuressa on tietokantadumppi minkä importtaamalla saa esim. admin tunnukset toimimaan. 
+
+2. Maksupalikan vanhentuneen sertifikaatin takia, serveri saattaa vaatia että selaimessa käydään osoitteessa https://localhost:8000 varmistamassa vanhentunut sertifikaatti.
+
+3. Admin puoleen pääsee käsiksi seuraavilla osoitepäätteillä:
+    /kirjaudu
+    /adminEtusivu
+    /adminMuokkaa
+    /adminLukitse
+
+Projektissa ei kirjautuminen toimi oikein, koska koulun rajotteiden takia sen toteutus jäi vajavaiseksi
+
 ## Tarvittavat ohjelmistot kehitykseen:
 
 GIT - Versio 2.15.0 tai uudempi
@@ -52,8 +66,6 @@ Koulun koneilla on oltava kirjautunut .\Student tunnuksilla
 5. **!HUOM!** Seuraava komento on tarkoitettu ainoastaan julkaisua varten `grunt` 
 
 Tämän hetkinen toteutus toimii paikallisesti, mutta tietokannat löytyvät mLabin palvelimilta, joten varaukset löytyvät koneella kuin koneella. **!HUOM!** Nodejs palvelin pitää olla päällä (löytyy projektin SERVERI-kansiosta komennolla `node main.js`).
-
-Sähköpostin lähettäminen paikalliselta palvelimelta vaatii koneen palomuurin sulkemista.
 
 ### Tekniikat
 
