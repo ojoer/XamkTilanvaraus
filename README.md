@@ -14,8 +14,10 @@ Projekti on toteutettu kouluprojektia varten kurssille Sähköisen palvelun suun
     /adminEtusivu
     /adminMuokkaa
     /adminLukitse
+    
+    Projektissa ei kirjautuminen toimi oikein, koska koulun rajotteiden takia sen toteutus jäi vajavaiseksi
 
-Projektissa ei kirjautuminen toimi oikein, koska koulun rajotteiden takia sen toteutus jäi vajavaiseksi
+4. Projektin juuressa oleva esittelyversio.rar on esityksessä käytetty versio softasta
 
 ## Tarvittavat ohjelmistot kehitykseen:
 
