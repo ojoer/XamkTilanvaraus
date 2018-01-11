@@ -5,7 +5,9 @@ Projekti on toteutettu kouluprojektia varten kurssille Sähköisen palvelun suun
 
 **!Huom!**
 
-1. Koulun palomuuri blokkaa tietokantojen käytön pilvestä sekä sähköpostin lähetyksen. Jos softaa ajaa koulun verkossa, täytyy asentaa paikallinen mongodb tietokantapalvelin, projektin juuressa on tietokantadumppi minkä importtaamalla saa esim. admin tunnukset toimimaan. 
+1. Koulun palomuuri blokkaa tietokantojen käytön pilvestä sekä sähköpostin lähetyksen. Jos softaa ajaa koulun verkossa, täytyy asentaa paikallinen mongodb tietokantapalvelin, projektin juuressa on tietokantadumppi kansiossa varaukset, minkä importtaamalla saa esim. admin tunnukset toimimaan. 
+
+Itse softa toimii kuitenkin myös ilman dumppia, pelkkä tietokanta riittää.
 
 2. Maksupalikan vanhentuneen sertifikaatin takia, serveri saattaa vaatia että selaimessa käydään osoitteessa https://localhost:8000 varmistamassa vanhentunut sertifikaatti.
 
