@@ -13,9 +13,14 @@ Itse softa toimii kuitenkin myös ilman dumppia, pelkkä tietokanta riittää.
 
 3. Admin puoleen pääsee käsiksi seuraavilla osoitepäätteillä:
     /kirjaudu
+
     /adminEtusivu
+
     /adminMuokkaa
+
     /adminLukitse
+
+    admin tunnukset ovat Username: XamkTilanvarausAdmin ja Password: X4mkK1ss4K4l4
     
     Projektissa ei kirjautuminen toimi oikein, koska koulun rajotteiden takia sen toteutus jäi vajavaiseksi
 
